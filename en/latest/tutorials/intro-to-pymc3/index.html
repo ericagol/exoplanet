@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<title>A quick intro to PyMC3 for exoplaneteers &mdash; exoplanet 0.2.5.dev40+gec27062 documentation</title>
+  
+
+<link rel="shortcut icon" href="../../_static/logo.png"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono"><link rel="stylesheet" href="../../_static/typlog.css?v=0.7.3" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css?v=0.7.3" type="text/css" /><link rel="stylesheet" href="../../_static/css/exoplanet.css?v=2019-08-02" type="text/css" />
+      <link rel="index" title="Index" href="../../genindex/"/>
+      <link rel="search" title="Search" href="../../search/"/>
+    <link rel="top" title="exoplanet 0.2.5.dev40+gec27062 documentation" href="../../"/>
+      <link rel="next" title="PyMC3 extras" href="../pymc3-extras/"/>
+      <link rel="prev" title="Developer documentation" href="../../user/dev/"/>
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '');ga('send', 'pageview');</script>
+  <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="exoplanet">
+  <meta property="og:title" content="A quick intro to PyMC3 for exoplaneteers">
+  <meta name="twitter:card" content="summary">
+</head>
+<body role="document" data-page="tutorials/intro-to-pymc3">
+  <header class="t-head">
+    <div class="t-head_menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 384h384v-42.666H64V384zm0-106.666h384v-42.667H64v42.667zM64 128v42.665h384V128H64z"/></svg></div>
+    <a class="t-head_logo" href="../../"><img src="../../_static/logo.png" alt="Logo"/>exoplanet
+    </a>
+  </header>
+  <aside class="t-sidebar">
+    <div class="t-sidebar_close">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>
+    </div>
+    <div class="inner">
+<a class="logo" href="../../"><img src="../../_static/logo.png" alt="Logo"/>
+    exoplanet
+</a><div class="globaltoc">
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user/install/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../citation/">Citing exoplanet &amp; its dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/api/">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/dev/">Developer documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A quick intro to PyMC3 for exoplaneteers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hello-world-aka-fitting-a-line-to-data">Hello world (AKA fitting a line to data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#a-more-realistic-example-radial-velocity-exoplanets">A more realistic example: radial velocity exoplanets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pymc3-extras/">PyMC3 extras</a></li>
+</ul>
+
+</div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../">Documentation overview</a><ul>
+      <li>Previous: <a href="../../user/dev/" title="previous chapter">Developer documentation</a></li>
+      <li>Next: <a href="../pymc3-extras/" title="next chapter">PyMC3 extras</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox">
+  <form class="search" action="../../search/" method="get">
+    <div class="input-group">
+      <input type="text" name="q" placeholder="Search" />
+      <button type="submit">Go</button>
+    </div>
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+    </div>
+  </aside>
+  <div class="t-content">
+    <div class="t-body yue">
+      
+
+
+  <span class="target" id="module-exoplanet"></span><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial was generated from an IPython notebook that can be
+downloaded <a class="reference external" href="../../_static/notebooks/intro-to-pymc3.ipynb">here</a>.</p>
+</div>
+<div class="section" id="a-quick-intro-to-pymc3-for-exoplaneteers">
+<span id="intro-to-pymc3"></span><h1>A quick intro to PyMC3 for exoplaneteers<a class="headerlink" href="#a-quick-intro-to-pymc3-for-exoplaneteers" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Hamiltonian_Monte_Carlo">Hamiltonian Monte Carlo
+(HMC)</a> methods
+haven’t been widely used in astrophysics, but they are the standard
+methods for probabilistic inference using Markov chain Monte Carlo
+(MCMC) in many other fields. <em>exoplanet</em> is designed to provide the
+building blocks for fitting many exoplanet datasets using this
+technology, and this tutorial presents some of the basic features of the
+<a class="reference external" href="https://docs.pymc.io/">PyMC3</a> modeling language and inference
+engine. The <a class="reference external" href="https://docs.pymc.io/">documentation for PyMC3</a> includes
+many other tutorials that you should check out to get more familiar with
+the features that are available.</p>
+<p>In this tutorial, we will go through two simple examples of fitting some
+data using PyMC3. The first is the classic fitting a line to data with
+unknown error bars, and the second is a more relevant example where we
+fit a radial velocity model to the public radial velocity observations
+of <a class="reference external" href="https://en.wikipedia.org/wiki/51_Pegasi">51 Peg</a>. You can read
+more about fitting lines to data <a class="reference external" href="https://arxiv.org/abs/1008.4686">in the bible of line
+fitting</a> and you can see another
+example of fitting the 51 Peg data using HMC (this time using
+<a class="reference external" href="http://mc-stan.org">Stan</a>)
+<a class="reference external" href="https://dfm.io/posts/stan-c++/">here</a>.</p>
+<div class="section" id="hello-world-aka-fitting-a-line-to-data">
+<h2>Hello world (AKA fitting a line to data)<a class="headerlink" href="#hello-world-aka-fitting-a-line-to-data" title="Permalink to this headline">¶</a></h2>
+<p>My standard intro to a new modeling language or inference framework is
+to fit a line to data. So. Let’s do that with PyMC3.</p>
+<p>To start, we’ll generate some fake data using a linear model. Feel free
+to change the random number seed to try out a different dataset.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">true_m</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">true_b</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.3</span>
+<span class="n">true_logs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">true_b</span> <span class="o">+</span> <span class="n">true_m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">true_logs</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s2">&quot;.k&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/intro-to-pymc3_4_1.png" src="../../_images/intro-to-pymc3_4_1.png" />
+<p>To fit a model to these data, our model will have 3 parameters: the
+slope <span class="math notranslate nohighlight">\(m\)</span>, the intercept <span class="math notranslate nohighlight">\(b\)</span>, and the log of the uncertainty
+<span class="math notranslate nohighlight">\(\log(\sigma)\)</span>. To start, let’s choose broad uniform priors on
+these parameters:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+p(m) &amp;=&amp; \left\{\begin{array}{ll}
+1/10 &amp; \mathrm{if}\,-5 &lt; m &lt; 5 \\
+0 &amp; \mathrm{otherwise} \\
+\end{array}\right. \\
+p(b) &amp;=&amp; \left\{\begin{array}{ll}
+1/10 &amp; \mathrm{if}\,-5 &lt; b &lt; 5 \\
+0 &amp; \mathrm{otherwise} \\
+\end{array}\right. \\
+p(\log(\sigma)) &amp;=&amp; \left\{\begin{array}{ll}
+1/10 &amp; \mathrm{if}\,-5 &lt; b &lt; 5 \\
+0 &amp; \mathrm{otherwise} \\
+\end{array}\right.
+\end{eqnarray}\end{split}\]</div>
+<p>Then, the log-likelihood function will be</p>
+<div class="math notranslate nohighlight">
+\[\log p(\{y_n\}\,|\,m,\,b,\,\log(\sigma)) = -\frac{1}{2}\sum_{n=1}^N \left[\frac{(y_n - m\,x_n - b)^2}{\sigma^2} + \log(2\,\pi\,\sigma^2)\right]\]</div>
+<p>[<strong>Note:</strong> the second normalization term is needed in this model because
+we are fitting for <span class="math notranslate nohighlight">\(\sigma\)</span> and the second term is <em>not</em> a
+constant.]</p>
+<p>Another way of writing this model that might not be familiar is the
+following:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{eqnarray}
+m &amp;\sim&amp; \mathrm{Uniform}(-5,\,5) \\
+b &amp;\sim&amp; \mathrm{Uniform}(-5,\,5) \\
+\log(\sigma) &amp;\sim&amp; \mathrm{Uniform}(-5,\,5) \\
+y_n &amp;\sim&amp; \mathrm{Normal}(m\,x_n+b,\,\sigma)
+\end{eqnarray}\end{split}\]</div>
+<p>This is the way that a model like this is often defined in statistics
+and it will be useful when we implement out model in PyMC3 so take a
+moment to make sure that you understand the notation.</p>
+<p>Now, let’s implement this model in PyMC3. The documentation for the
+distributions available in PyMC3’s modeling language can be <a class="reference external" href="https://docs.pymc.io/api/distributions/continuous.html">found
+here</a> and
+these will come in handy as you go on to write your own models.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+
+    <span class="c1"># Define the priors on each parameter:</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">logs</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;logs&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+    <span class="c1"># Define the likelihood. A few comments:</span>
+    <span class="c1">#  1. For mathematical operations like &quot;exp&quot;, you can&#39;t use</span>
+    <span class="c1">#     numpy. Instead, use the mathematical operations defined</span>
+    <span class="c1">#     in &quot;pm.math&quot;.</span>
+    <span class="c1">#  2. To condition on data, you use the &quot;observed&quot; keyword</span>
+    <span class="c1">#     argument to any distribution. In this case, we want to</span>
+    <span class="c1">#     use the &quot;Normal&quot; distribution (look up the docs for</span>
+    <span class="c1">#     this).</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">pm</span><span class="o">.</span><span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logs</span><span class="p">),</span> <span class="n">observed</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="c1"># This is how you will sample the model. Take a look at the</span>
+    <span class="c1"># docs to see that other parameters that are available.</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">draws</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Auto-assigning NUTS sampler...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (2 chains in 2 jobs)
+NUTS: [logs, b, m]
+Sampling 2 chains, 0 divergences: 100%|██████████| 4000/4000 [00:04&lt;00:00, 964.31draws/s]
+</pre></div>
+</div>
+<p>Now since we now have samples, let’s make some diagnostic plots. The
+first plot to look at is the “traceplot” implemented in PyMC3. In this
+plot, you’ll see the marginalized distribution for each parameter on the
+left and the trace plot (parameter value as a function of step number)
+on the right. In each panel, you should see two lines with different
+colors. These are the results of different independent chains and if the
+results are substantially different in the different chains then there
+is probably something going wrong.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">traceplot</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;logs&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<img alt="../../_images/intro-to-pymc3_8_0.png" src="../../_images/intro-to-pymc3_8_0.png" />
+<p>It’s also good to quantify that “looking substantially different”
+argument. This is implemented in PyMC3 as the “summary” function. In
+this table, some of the key columns to look at are <code class="docutils literal notranslate"><span class="pre">n_eff</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Rhat</span></code>. * <code class="docutils literal notranslate"><span class="pre">n_eff</span></code> shows an estimate of the number of effective (or
+independent) samples for that parameter. In this case, <code class="docutils literal notranslate"><span class="pre">n_eff</span></code> should
+probably be around 500 per chain (there should have been 2 chains run).
+* <code class="docutils literal notranslate"><span class="pre">Rhat</span></code> shows the <a class="reference external" href="https://docs.pymc.io/api/diagnostics.html#pymc3.diagnostics.gelman_rubin">Gelman–Rubin
+statistic</a>
+and it should be close to 1.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;logs&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>hpd_3%</th>
+      <th>hpd_97%</th>
+      <th>mcse_mean</th>
+      <th>mcse_sd</th>
+      <th>ess_mean</th>
+      <th>ess_sd</th>
+      <th>ess_bulk</th>
+      <th>ess_tail</th>
+      <th>r_hat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>m</th>
+      <td>0.511</td>
+      <td>0.028</td>
+      <td>0.457</td>
+      <td>0.560</td>
+      <td>0.001</td>
+      <td>0.001</td>
+      <td>1010.0</td>
+      <td>1010.0</td>
+      <td>1010.0</td>
+      <td>1030.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>-1.326</td>
+      <td>0.074</td>
+      <td>-1.460</td>
+      <td>-1.185</td>
+      <td>0.002</td>
+      <td>0.002</td>
+      <td>979.0</td>
+      <td>979.0</td>
+      <td>980.0</td>
+      <td>1202.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>logs</th>
+      <td>-1.269</td>
+      <td>0.105</td>
+      <td>-1.468</td>
+      <td>-1.084</td>
+      <td>0.003</td>
+      <td>0.002</td>
+      <td>1080.0</td>
+      <td>1080.0</td>
+      <td>1072.0</td>
+      <td>965.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>The last diagnostic plot that we’ll make here is the <a class="reference external" href="https://corner.readthedocs.io">corner plot made
+using corner.py</a>. The easiest way to
+do this using PyMC3 is to first convert the trace to a <a class="reference external" href="https://pandas.pydata.org/">Pandas
+DataFrame</a> and then pass that to
+<code class="docutils literal notranslate"><span class="pre">corner.py</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">corner</span>  <span class="c1"># https://corner.readthedocs.io</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">trace_to_dataframe</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">varnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;logs&quot;</span><span class="p">])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">truths</span><span class="o">=</span><span class="p">[</span><span class="n">true_m</span><span class="p">,</span> <span class="n">true_b</span><span class="p">,</span> <span class="n">true_logs</span><span class="p">])</span>
+</pre></div>
+</div>
+<img alt="../../_images/intro-to-pymc3_12_0.png" src="../../_images/intro-to-pymc3_12_0.png" />
+<p><strong>Extra credit:</strong> Here are a few suggestions for things to try out while
+getting more familiar with PyMC3:</p>
+<ol class="arabic simple">
+<li><p>Try initializing the parameters using the <code class="docutils literal notranslate"><span class="pre">testval</span></code> argument to the
+distributions. Does this improve performance in this case? It will
+substantially improve performance in more complicated examples.</p></li>
+<li><p>Try changing the priors on the parameters. For example, try the
+“uninformative” prior <a class="reference external" href="http://jakevdp.github.io/blog/2014/06/14/frequentism-and-bayesianism-4-bayesian-in-python/#Prior-on-Slope-and-Intercept">recommended by Jake VanderPlas on his
+blog</a>.</p></li>
+<li><p>What happens as you substantially increase or decrease the simulated
+noise? Does the performance change significantly? Why?</p></li>
+</ol>
+</div>
+<div class="section" id="a-more-realistic-example-radial-velocity-exoplanets">
+<h2>A more realistic example: radial velocity exoplanets<a class="headerlink" href="#a-more-realistic-example-radial-velocity-exoplanets" title="Permalink to this headline">¶</a></h2>
+<p>While the above example was cute, it doesn’t really fully exploit the
+power of PyMC3 and it doesn’t really show some of the real issues that
+you will face when you use PyMC3 as an astronomer. To get a better sense
+of how you might use PyMC3 in Real Life™, let’s take a look at a more
+realistic example: fitting a Keplerian orbit to radial velocity
+observations.</p>
+<p>One of the key aspects of this problem that I want to highlight is the
+fact that PyMC3 (and the underlying model building framework
+<a class="reference external" href="http://deeplearning.net/software/theano/">Theano</a>) don’t have
+out-of-the-box support for the root-finding that is required to solve
+Kepler’s equation. As part of the process of computing a Keplerian RV
+model, we must solve the equation:</p>
+<div class="math notranslate nohighlight">
+\[M = E - e\,\sin E\]</div>
+<p>for the eccentric anomaly <span class="math notranslate nohighlight">\(E\)</span> given some mean anomaly <span class="math notranslate nohighlight">\(M\)</span>
+and eccentricity <span class="math notranslate nohighlight">\(e\)</span>. There are commonly accepted methods of
+solving this equation using <a class="reference external" href="https://en.wikipedia.org/wiki/Newton%27s_method">Newton’s
+method</a>, but if we
+want to expose that to PyMC3, we have to define a <a class="reference external" href="http://deeplearning.net/software/theano/extending/extending_theano.html">custom Theano
+operation</a>
+with a custom gradient. I won’t go into the details of the math (because
+<a class="reference external" href="https://dfm.io/posts/stan-c++/">I blogged about it</a>) and I won’t go
+into the details of the implementation (because <a class="reference external" href="https://github.com/dfm/exoplanet/tree/master/exoplanet/theano_ops/kepler">you can take a look at
+it on
+GitHub</a>).
+So, for this tutorial, we’ll use the custom Kepler solver that is
+implemented as part of <em>exoplanet</em> and fit the publicly available radial
+velocity observations of the famous exoplanetary system 51 Peg using
+PyMC3.</p>
+<p>First, we need to download the data from the exoplanet archive:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Download the dataset from the Exoplanet Archive:</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://exoplanetarchive.ipac.caltech.edu/data/ExoData/0113/0113357/data/UID_0113357_RVC_001.tbl&quot;</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">l</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">l</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;|&quot;</span><span class="p">)</span>
+    <span class="p">],</span>
+    <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">t</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">rv_err</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">T</span>
+<span class="n">t</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+
+<span class="c1"># Plot the observations &quot;folded&quot; on the published period:</span>
+<span class="c1"># Butler et al. (2006) https://arxiv.org/abs/astro-ph/0607493</span>
+<span class="n">lit_period</span> <span class="o">=</span> <span class="mf">4.230785</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">t</span> <span class="o">%</span> <span class="n">lit_period</span><span class="p">)</span> <span class="o">/</span> <span class="n">lit_period</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">rv_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.k&quot;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">110</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span>
+    <span class="s2">&quot;period = </span><span class="si">{0:.6f}</span><span class="s2"> days&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lit_period</span><span class="p">),</span>
+    <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+    <span class="n">xycoords</span><span class="o">=</span><span class="s2">&quot;axes fraction&quot;</span><span class="p">,</span>
+    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+    <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span>
+    <span class="n">va</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;radial velocity [m/s]&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;phase&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/intro-to-pymc3_14_0.png" src="../../_images/intro-to-pymc3_14_0.png" />
+<p>Now, here’s the implementation of a radial velocity model in PyMC3. Some
+of this will look familiar after the Hello World example, but things are
+a bit more complicated now. Take a minute to take a look through this
+and see if you can follow it. There’s a lot going on, so I want to point
+out a few things to pay attention to:</p>
+<ol class="arabic simple">
+<li><p>All of the mathematical operations (for example <code class="docutils literal notranslate"><span class="pre">exp</span></code> and <code class="docutils literal notranslate"><span class="pre">sqrt</span></code>)
+are being performed using Theano instead of NumPy.</p></li>
+<li><p>All of the parameters have initial guesses provided. This is an
+example where this makes a big difference because some of the
+parameters (like period) are very tightly constrained.</p></li>
+<li><p>Some of the lines are wrapped in <code class="docutils literal notranslate"><span class="pre">Deterministic</span></code> distributions.
+This can be useful because it allows us to track values as the chain
+progresses even if they’re not parameters. For example, after
+sampling, we will have a sample for <code class="docutils literal notranslate"><span class="pre">bkg</span></code> (the background RV trend)
+for each step in the chain. This can be especially useful for making
+plots of the results.</p></li>
+<li><p>Similarly, at the end of the model definition, we compute the RV
+curve for a single orbit on a fine grid. This can be very useful for
+diagnosing fits gone wrong.</p></li>
+<li><p>For parameters that specify angles (like <span class="math notranslate nohighlight">\(\omega\)</span>, called <code class="docutils literal notranslate"><span class="pre">w</span></code>
+in the model below), it can be inefficient to sample in the angle
+directly because of the fact that the value wraps around at
+<span class="math notranslate nohighlight">\(2\pi\)</span>. Instead, it can be better to sample the unit vector
+specified by the angle. In practice, this can be achieved by sampling
+a 2-vector from an isotropic Gaussian and normalizing the components
+by the norm. This is implemented as part of <em>exoplanet</em> in the
+<a class="reference internal" href="../../user/api/#exoplanet.distributions.Angle" title="exoplanet.distributions.Angle"><code class="xref py py-class docutils literal notranslate"><span class="pre">exoplanet.distributions.Angle</span></code></a> class.</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">theano.tensor</span> <span class="k">as</span> <span class="nn">tt</span>
+
+<span class="kn">from</span> <span class="nn">exoplanet.orbits</span> <span class="kn">import</span> <span class="n">get_true_anomaly</span>
+<span class="kn">from</span> <span class="nn">exoplanet.distributions</span> <span class="kn">import</span> <span class="n">Angle</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+
+    <span class="c1"># Parameters</span>
+    <span class="n">logK</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+        <span class="s2">&quot;logK&quot;</span><span class="p">,</span>
+        <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">upper</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
+        <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">rv</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">rv</span><span class="p">))),</span>
+    <span class="p">)</span>
+    <span class="n">logP</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+        <span class="s2">&quot;logP&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">lit_period</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span><span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="n">Angle</span><span class="p">(</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">logjitter</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Uniform</span><span class="p">(</span>
+        <span class="s2">&quot;logjitter&quot;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rv_err</span><span class="p">))</span>
+    <span class="p">)</span>
+    <span class="n">rv0</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;rv0&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="n">rvtrend</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;rvtrend&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="mf">10.0</span><span class="p">,</span> <span class="n">testval</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+
+    <span class="c1"># Deterministic transformations</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">logP</span><span class="p">)</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logP</span><span class="p">))</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">logK</span><span class="p">))</span>
+    <span class="n">cosw</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="n">sinw</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+    <span class="n">s2</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">logjitter</span><span class="p">)</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="p">(</span><span class="n">phi</span> <span class="o">+</span> <span class="n">w</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
+
+    <span class="c1"># The RV model</span>
+    <span class="n">bkg</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span><span class="s2">&quot;bkg&quot;</span><span class="p">,</span> <span class="n">rv0</span> <span class="o">+</span> <span class="n">rvtrend</span> <span class="o">*</span> <span class="n">t</span> <span class="o">/</span> <span class="mf">365.25</span><span class="p">)</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="n">t</span> <span class="o">-</span> <span class="p">(</span><span class="n">phi</span> <span class="o">+</span> <span class="n">w</span><span class="p">)</span>
+
+    <span class="c1"># This is the line that uses the custom Kepler solver</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">get_true_anomaly</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">e</span> <span class="o">+</span> <span class="n">tt</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">M</span><span class="p">))</span>
+    <span class="n">rvmodel</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span>
+        <span class="s2">&quot;rvmodel&quot;</span><span class="p">,</span> <span class="n">bkg</span> <span class="o">+</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">cosw</span> <span class="o">*</span> <span class="p">(</span><span class="n">tt</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">+</span> <span class="n">e</span><span class="p">)</span> <span class="o">-</span> <span class="n">sinw</span> <span class="o">*</span> <span class="n">tt</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Condition on the observations</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="n">tt</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">rv_err</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">tt</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">logjitter</span><span class="p">))</span>
+    <span class="n">pm</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="s2">&quot;obs&quot;</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="n">rvmodel</span><span class="p">,</span> <span class="n">sd</span><span class="o">=</span><span class="n">err</span><span class="p">,</span> <span class="n">observed</span><span class="o">=</span><span class="n">rv</span><span class="p">)</span>
+
+    <span class="c1"># Compute the phased RV signal</span>
+    <span class="n">phase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="n">M_pred</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">phase</span> <span class="o">-</span> <span class="p">(</span><span class="n">phi</span> <span class="o">+</span> <span class="n">w</span><span class="p">)</span>
+    <span class="n">f_pred</span> <span class="o">=</span> <span class="n">get_true_anomaly</span><span class="p">(</span><span class="n">M_pred</span><span class="p">,</span> <span class="n">e</span> <span class="o">+</span> <span class="n">tt</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">M_pred</span><span class="p">))</span>
+    <span class="n">rvphase</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">Deterministic</span><span class="p">(</span>
+        <span class="s2">&quot;rvphase&quot;</span><span class="p">,</span> <span class="n">K</span> <span class="o">*</span> <span class="p">(</span><span class="n">cosw</span> <span class="o">*</span> <span class="p">(</span><span class="n">tt</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">f_pred</span><span class="p">)</span> <span class="o">+</span> <span class="n">e</span><span class="p">)</span> <span class="o">-</span> <span class="n">sinw</span> <span class="o">*</span> <span class="n">tt</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">f_pred</span><span class="p">))</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, I’ve found that it is useful to first optimize the
+parameters to find the “maximum a posteriori” (MAP) parameters and then
+start the sampler from there. This is useful here because MCMC is not
+designed to <em>find</em> the maximum of the posterior; it’s just meant to
+sample the shape of the posterior. The performance of all MCMC methods
+can be really bad when the initialization isn’t good (especially when
+some parameters are very well constrained). To find the maximum a
+posteriori parameters using PyMC3, you can use the
+<a class="reference internal" href="../../user/api/#exoplanet.optimize" title="exoplanet.optimize"><code class="xref py py-func docutils literal notranslate"><span class="pre">exoplanet.optimize()</span></code></a> function:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">exoplanet</span> <span class="kn">import</span> <span class="n">optimize</span>
+
+<span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">map_params</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">optimizing</span> <span class="n">logp</span> <span class="k">for</span> <span class="n">variables</span><span class="p">:</span> <span class="p">[</span><span class="n">rvtrend</span><span class="p">,</span> <span class="n">rv0</span><span class="p">,</span> <span class="n">logjitter</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">logP</span><span class="p">,</span> <span class="n">logK</span><span class="p">]</span>
+<span class="mi">152</span><span class="n">it</span> <span class="p">[</span><span class="mi">00</span><span class="p">:</span><span class="mi">03</span><span class="p">,</span> <span class="mf">42.24</span><span class="n">it</span><span class="o">/</span><span class="n">s</span><span class="p">,</span> <span class="n">logp</span><span class="o">=-</span><span class="mf">8.351913e+02</span><span class="p">]</span>
+<span class="n">message</span><span class="p">:</span> <span class="n">Desired</span> <span class="n">error</span> <span class="ow">not</span> <span class="n">necessarily</span> <span class="n">achieved</span> <span class="n">due</span> <span class="n">to</span> <span class="n">precision</span> <span class="n">loss</span><span class="o">.</span>
+<span class="n">logp</span><span class="p">:</span> <span class="o">-</span><span class="mf">1325.8433398976674</span> <span class="o">-&gt;</span> <span class="o">-</span><span class="mf">835.1912653583939</span>
+</pre></div>
+</div>
+<p>Let’s make a plot to check that this initialization looks reasonable. In
+the top plot, we’re looking at the RV observations as a function of time
+with the initial guess for the long-term trend overplotted in blue. In
+the lower panel, we plot the “folded” curve where we have wrapped the
+observations onto the best-fit period and the prediction for a single
+overplotted in orange. If this doesn’t look good, try adjusting the
+initial guesses for the parameters and see if you can get a better fit.</p>
+<p><strong>Exercise:</strong> Try changing the initial guesses for the parameters (as
+specified by the <code class="docutils literal notranslate"><span class="pre">testval</span></code> argument) and see how sensitive the results
+are to these values. Are there some parameters that are less important?
+Why is this?</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">period</span> <span class="o">=</span> <span class="n">map_params</span><span class="p">[</span><span class="s2">&quot;P&quot;</span><span class="p">]</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">rv_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.k&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">map_params</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">110</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;radial velocity [m/s]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time [days]&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">t</span> <span class="o">%</span> <span class="n">period</span><span class="p">,</span> <span class="n">rv</span> <span class="o">-</span> <span class="n">map_params</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">rv_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.k&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">phase</span> <span class="o">*</span> <span class="n">period</span><span class="p">,</span> <span class="n">map_params</span><span class="p">[</span><span class="s2">&quot;rvphase&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">110</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;radial velocity [m/s]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;phase [days]&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/intro-to-pymc3_20_0.png" src="../../_images/intro-to-pymc3_20_0.png" />
+<p>Now let’s sample the posterior starting from our MAP estimate.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">trace</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span>
+        <span class="n">draws</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">tune</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="n">map_params</span><span class="p">,</span> <span class="n">chains</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">cores</span><span class="o">=</span><span class="mi">2</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<pre class="literal-block">Auto-assigning NUTS sampler...
+Initializing NUTS using jitter+adapt_diag...
+Multiprocess sampling (2 chains in 2 jobs)
+NUTS: [rvtrend, rv0, logjitter, w, e, phi, logP, logK]
+Sampling 2 chains, 22 divergences: 100%|██████████| 6000/6000 [00:38&lt;00:00, 154.65draws/s]
+There were 12 divergences after tuning. Increase <cite>target_accept</cite> or reparameterize.
+There were 10 divergences after tuning. Increase <cite>target_accept</cite> or reparameterize.</pre>
+<p>As above, it’s always a good idea to take a look at the summary
+statistics for the chain. If everything went as planned, there should be
+more than 1000 effective samples per chain and the Rhat values should be
+close to 1. (Not too bad for less than 30 seconds of run time!)</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pm</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span>
+    <span class="n">trace</span><span class="p">,</span>
+    <span class="n">var_names</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;logK&quot;</span><span class="p">,</span> <span class="s2">&quot;logP&quot;</span><span class="p">,</span> <span class="s2">&quot;phi&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="s2">&quot;logjitter&quot;</span><span class="p">,</span> <span class="s2">&quot;rv0&quot;</span><span class="p">,</span> <span class="s2">&quot;rvtrend&quot;</span><span class="p">],</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>sd</th>
+      <th>hpd_3%</th>
+      <th>hpd_97%</th>
+      <th>mcse_mean</th>
+      <th>mcse_sd</th>
+      <th>ess_mean</th>
+      <th>ess_sd</th>
+      <th>ess_bulk</th>
+      <th>ess_tail</th>
+      <th>r_hat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>logK</th>
+      <td>4.019</td>
+      <td>0.010</td>
+      <td>4.000</td>
+      <td>4.036</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>3310.0</td>
+      <td>3308.0</td>
+      <td>3324.0</td>
+      <td>2394.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>logP</th>
+      <td>1.442</td>
+      <td>0.000</td>
+      <td>1.442</td>
+      <td>1.442</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>3874.0</td>
+      <td>3874.0</td>
+      <td>3872.0</td>
+      <td>2822.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>phi</th>
+      <td>0.397</td>
+      <td>0.009</td>
+      <td>0.380</td>
+      <td>0.416</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>2418.0</td>
+      <td>2410.0</td>
+      <td>2424.0</td>
+      <td>2585.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>e</th>
+      <td>0.010</td>
+      <td>0.008</td>
+      <td>0.000</td>
+      <td>0.024</td>
+      <td>0.000</td>
+      <td>0.000</td>
+      <td>1739.0</td>
+      <td>1739.0</td>
+      <td>1183.0</td>
+      <td>905.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>w</th>
+      <td>0.559</td>
+      <td>1.399</td>
+      <td>-2.300</td>
+      <td>3.111</td>
+      <td>0.039</td>
+      <td>0.032</td>
+      <td>1295.0</td>
+      <td>986.0</td>
+      <td>1531.0</td>
+      <td>1545.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>logjitter</th>
+      <td>-4.588</td>
+      <td>3.070</td>
+      <td>-9.782</td>
+      <td>0.274</td>
+      <td>0.070</td>
+      <td>0.055</td>
+      <td>1940.0</td>
+      <td>1545.0</td>
+      <td>1817.0</td>
+      <td>1491.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>rv0</th>
+      <td>-1.805</td>
+      <td>0.379</td>
+      <td>-2.529</td>
+      <td>-1.110</td>
+      <td>0.007</td>
+      <td>0.005</td>
+      <td>3247.0</td>
+      <td>3247.0</td>
+      <td>3266.0</td>
+      <td>2557.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>rvtrend</th>
+      <td>-1.587</td>
+      <td>0.190</td>
+      <td>-1.935</td>
+      <td>-1.225</td>
+      <td>0.003</td>
+      <td>0.002</td>
+      <td>3071.0</td>
+      <td>2985.0</td>
+      <td>3074.0</td>
+      <td>2397.0</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+</div><p>Similarly, we can make the corner plot again for this model.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">pm</span><span class="o">.</span><span class="n">trace_to_dataframe</span><span class="p">(</span><span class="n">trace</span><span class="p">,</span> <span class="n">varnames</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;K&quot;</span><span class="p">,</span> <span class="s2">&quot;P&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">])</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">corner</span><span class="o">.</span><span class="n">corner</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../../_images/intro-to-pymc3_26_0.png" src="../../_images/intro-to-pymc3_26_0.png" />
+<p>Finally, the last plot that we’ll make here is of the posterior
+predictive density. In this case, this means that we want to look at the
+distribution of predicted models that are consistent with the data. As
+above, the top plot shows the raw observations as black error bars and
+the RV trend model is overplotted in blue. But, this time, the blue line
+is actually composed of 25 lines that are samples from the posterior
+over trends that are consistent with the data. In the bottom panel, the
+orange lines indicate the same 25 posterior samples for the RV curve of
+one orbit.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="n">period</span> <span class="o">=</span> <span class="n">map_params</span><span class="p">[</span><span class="s2">&quot;P&quot;</span><span class="p">]</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">rv</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">rv_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.k&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;radial velocity [m/s]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time [days]&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">t</span> <span class="o">%</span> <span class="n">period</span><span class="p">,</span> <span class="n">rv</span> <span class="o">-</span> <span class="n">map_params</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">],</span> <span class="n">yerr</span><span class="o">=</span><span class="n">rv_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.k&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;radial velocity [m/s]&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;phase [days]&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">trace</span><span class="p">)</span> <span class="o">*</span> <span class="n">trace</span><span class="o">.</span><span class="n">nchains</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">25</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">trace</span><span class="p">[</span><span class="s2">&quot;bkg&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">phase</span> <span class="o">*</span> <span class="n">period</span><span class="p">,</span> <span class="n">trace</span><span class="p">[</span><span class="s2">&quot;rvphase&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span>
+    <span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">110</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">110</span><span class="p">,</span> <span class="mi">110</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="../../_images/intro-to-pymc3_28_0.png" src="../../_images/intro-to-pymc3_28_0.png" />
+</div>
+</div>
+
+  <div class="t-pagination clearfix">
+    <span>
+      ← <a href="../../user/dev/" title="Developer documentation">Developer documentation</a>
+    </span>
+    <span style="float:right">
+      <a href="../pymc3-extras/" title="PyMC3 extras">PyMC3 extras</a> →
+    </span>
+  </div>
+
+
+    </div><footer class="t-foot">
+    &copy; Copyright 2018, 2019, Dan Foreman-Mackey.
+    <br>
+    A <a href="https://typlog.com/">typlog</a> <a href="https://github.com/typlog/sphinx-typlog-theme">sphinx theme</a>,
+    designed by <a href="https://lepture.com/">Hsiaoming Yang</a>.
+</footer>
+  </div>
+  <script>$(function(){$(".t-head_menu").on("click",function(){$("body").addClass("_expand")});$(".t-body").on("click",function(){$("body").removeClass("_expand")});$(".t-sidebar_close").on("click",function(){$("body").removeClass("_expand")});$("a.footnote-reference").on("click",function(e){e.preventDefault();var id=$(this).attr("href");var html=$(id).find("td.label + td").html();var w=Math.max(document.documentElement.clientWidth,window.innerWidth||0);var style="top:"+e.pageY+"px;";if(w>560){style+="width:480px;";if(e.pageX>240&&e.pageX+240<w){style+="left:"+(e.pageX-240)+"px;"}else if(e.pageX<=240){style+="left:20px;"}else{style+="right:20px;"}}showFootnote(html,style)});function showFootnote(html,style){var CONTENT_ID="typlog-footnote-content";var content=document.getElementById(CONTENT_ID);if(!content){content=document.createElement("div");content.id=CONTENT_ID;$(".t-body").append(content)}var MASK_ID="typlog-footnote-mask";var mask=document.getElementById(MASK_ID);if(!mask){mask=document.createElement("div");mask.id=MASK_ID;document.body.appendChild(mask);mask.addEventListener("click",function(){content.className="";mask.className=""})}content.innerHTML=html;content.setAttribute("style",style);content.className="_active";mask.className="_active"}function fetchGitHubRepo(repo){var url="https://api.github.com/repos/"+repo;$.getJSON(url,function(data){var counts=[+new Date,data.stargazers_count,data.forks_count];localStorage.setItem("gh:"+repo,JSON.stringify(counts));updateGitHubStats(counts[1],counts[2])})}function updateGitHubStats(stars,forks){$(".github_stars strong").text(stars);$(".github_forks strong").text(forks)}function initGitHub(url){if(!url){return}var repo=url.replace("https://github.com/","");var cache=localStorage.getItem("gh:"+repo);if(cache){try{var counts=JSON.parse(cache);updateGitHubStats(counts[1],counts[2]);var delta=new Date-counts[0];if(delta<0||delta>9e5){fetchGitHubRepo(repo)}}catch(error){fetchGitHubRepo(repo)}}else{fetchGitHubRepo(repo)}}initGitHub($(".github").attr("href"))});</script>
+</body>
+</html>

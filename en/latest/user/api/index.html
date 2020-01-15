@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<title>API documentation &mdash; exoplanet 0.2.5.dev40+gec27062 documentation</title>
+  
+
+<link rel="shortcut icon" href="../../_static/logo.png"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono"><link rel="stylesheet" href="../../_static/typlog.css?v=0.7.3" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css?v=0.7.3" type="text/css" /><link rel="stylesheet" href="../../_static/css/exoplanet.css?v=2019-08-02" type="text/css" />
+      <link rel="index" title="Index" href="../../genindex/"/>
+      <link rel="search" title="Search" href="../../search/"/>
+    <link rel="top" title="exoplanet 0.2.5.dev40+gec27062 documentation" href="../../"/>
+      <link rel="next" title="Developer documentation" href="../dev/"/>
+      <link rel="prev" title="Citing exoplanet &amp; its dependencies" href="../../tutorials/citation/"/>
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '');ga('send', 'pageview');</script>
+  <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="exoplanet">
+  <meta property="og:title" content="API documentation">
+  <meta name="twitter:card" content="summary">
+</head>
+<body role="document" data-page="user/api">
+  <header class="t-head">
+    <div class="t-head_menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 384h384v-42.666H64V384zm0-106.666h384v-42.667H64v42.667zM64 128v42.665h384V128H64z"/></svg></div>
+    <a class="t-head_logo" href="../../"><img src="../../_static/logo.png" alt="Logo"/>exoplanet
+    </a>
+  </header>
+  <aside class="t-sidebar">
+    <div class="t-sidebar_close">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>
+    </div>
+    <div class="inner">
+<a class="logo" href="../../"><img src="../../_static/logo.png" alt="Logo"/>
+    exoplanet
+</a><div class="globaltoc">
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/citation/">Citing exoplanet &amp; its dependencies</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#orbits">Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#light-curve-models">Light curve models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scalable-gaussian-processes">Scalable Gaussian processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#estimators">Estimators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#distributions">Distributions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#base-distributions">Base distributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#physical-distributions">Physical distributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#eccentricity-distributions">Eccentricity distributions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#units">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#citations">Citations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/">Developer documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/intro-to-pymc3/">A quick intro to PyMC3 for exoplaneteers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/pymc3-extras/">PyMC3 extras</a></li>
+</ul>
+
+</div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../">Documentation overview</a><ul>
+      <li>Previous: <a href="../../tutorials/citation/" title="previous chapter">Citing exoplanet &amp; its dependencies</a></li>
+      <li>Next: <a href="../dev/" title="next chapter">Developer documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox">
+  <form class="search" action="../../search/" method="get">
+    <div class="input-group">
+      <input type="text" name="q" placeholder="Search" />
+      <button type="submit">Go</button>
+    </div>
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+    </div>
+  </aside>
+  <div class="t-content">
+    <div class="t-body yue">
+      
+
+
+  <span class="target" id="module-exoplanet"></span><div class="section" id="api-documentation">
+<span id="api"></span><h1>API documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="orbits">
+<h2>Orbits<a class="headerlink" href="#orbits" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="exoplanet.orbits.KeplerianOrbit">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.orbits.</code><code class="sig-name descname">KeplerianOrbit</code><span class="sig-paren">(</span><em class="sig-param">period=None</em>, <em class="sig-param">a=None</em>, <em class="sig-param">t0=None</em>, <em class="sig-param">t_periastron=None</em>, <em class="sig-param">incl=None</em>, <em class="sig-param">b=None</em>, <em class="sig-param">duration=None</em>, <em class="sig-param">ecc=None</em>, <em class="sig-param">omega=None</em>, <em class="sig-param">Omega=None</em>, <em class="sig-param">m_planet=0.0</em>, <em class="sig-param">m_star=None</em>, <em class="sig-param">r_star=None</em>, <em class="sig-param">rho_star=None</em>, <em class="sig-param">m_planet_units=None</em>, <em class="sig-param">rho_star_units=None</em>, <em class="sig-param">model=None</em>, <em class="sig-param">contact_points_kwargs=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.KeplerianOrbit" title="Permalink to this definition">¶</a></dt>
+<dd><p>A system of bodies on Keplerian orbits around a common central</p>
+<p>Given the input parameters, the values of all other parameters will be
+computed so a <code class="docutils literal notranslate"><span class="pre">KeplerianOrbit</span></code> instance will always have attributes for
+each argument. Note that the units of the computed attributes will all be
+in the standard units of this class (<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>, <code class="docutils literal notranslate"><span class="pre">M_sun</span></code>, and <code class="docutils literal notranslate"><span class="pre">days</span></code>)
+except for <code class="docutils literal notranslate"><span class="pre">rho_star</span></code> which will be in <code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">/</span> <span class="pre">cm^3</span></code>.</p>
+<p>There are only specific combinations of input parameters that can be used:</p>
+<ol class="arabic simple">
+<li><p>First, either <code class="docutils literal notranslate"><span class="pre">period</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span></code> must be given. If values are given
+for both parameters, then neither <code class="docutils literal notranslate"><span class="pre">m_star</span></code> or <code class="docutils literal notranslate"><span class="pre">rho_star</span></code> can be
+defined because the stellar density implied by each planet will be
+computed in <code class="docutils literal notranslate"><span class="pre">rho_star</span></code>.</p></li>
+<li><p>Only one of <code class="docutils literal notranslate"><span class="pre">incl</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code> can be given.</p></li>
+<li><p>If a value is given for <code class="docutils literal notranslate"><span class="pre">ecc</span></code> then <code class="docutils literal notranslate"><span class="pre">omega</span></code> must also be given.</p></li>
+<li><p>If no stellar parameters are given, the central body is assumed to be
+the sun. If only <code class="docutils literal notranslate"><span class="pre">rho_star</span></code> is defined, the radius of the central is
+assumed to be <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">*</span> <span class="pre">R_sun</span></code>. Otherwise, at most two of <code class="docutils literal notranslate"><span class="pre">m_star</span></code>,
+<code class="docutils literal notranslate"><span class="pre">r_star</span></code>, and <code class="docutils literal notranslate"><span class="pre">rho_star</span></code> can be defined.</p></li>
+<li><p>Either <code class="docutils literal notranslate"><span class="pre">t0</span></code> (reference transit) or <code class="docutils literal notranslate"><span class="pre">t_periastron</span></code> must be given,
+but not both.</p></li>
+</ol>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>period</strong> – The orbital periods of the bodies in days.</p></li>
+<li><p><strong>a</strong> – The semimajor axes of the orbits in <code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p></li>
+<li><p><strong>t0</strong> – The time of a reference transit for each orbits in days.</p></li>
+<li><p><strong>t_periastron</strong> – The epoch of a reference periastron passage in days.</p></li>
+<li><p><strong>incl</strong> – The inclinations of the orbits in radians.</p></li>
+<li><p><strong>b</strong> – The impact parameters of the orbits.</p></li>
+<li><p><strong>ecc</strong> – The eccentricities of the orbits. Must be <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">ecc</span> <span class="pre">&lt;</span> <span class="pre">1</span></code>.</p></li>
+<li><p><strong>omega</strong> – The arguments of periastron for the orbits in radians.</p></li>
+<li><p><strong>Omega</strong> – The position angles of the ascending nodes in radians.</p></li>
+<li><p><strong>m_planet</strong> – The masses of the planets in units of <code class="docutils literal notranslate"><span class="pre">m_planet_units</span></code>.</p></li>
+<li><p><strong>m_star</strong> – The mass of the star in <code class="docutils literal notranslate"><span class="pre">M_sun</span></code>.</p></li>
+<li><p><strong>r_star</strong> – The radius of the star in <code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p></li>
+<li><p><strong>rho_star</strong> – The density of the star in units of <code class="docutils literal notranslate"><span class="pre">rho_star_units</span></code>.</p></li>
+<li><p><strong>m_planet_units</strong> – An <code class="docutils literal notranslate"><span class="pre">astropy.units</span></code> compatible unit object giving the
+units of the planet masses. If not given, the default is <code class="docutils literal notranslate"><span class="pre">M_sun</span></code>.</p></li>
+<li><p><strong>rho_star_units</strong> – An <code class="docutils literal notranslate"><span class="pre">astropy.units</span></code> compatible unit object giving the
+units of the stellar density. If not given, the default is
+<code class="docutils literal notranslate"><span class="pre">g</span> <span class="pre">/</span> <span class="pre">cm^3</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="exoplanet.orbits.KeplerianOrbit.get_planet_position">
+<code class="sig-name descname">get_planet_position</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">parallax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.KeplerianOrbit.get_planet_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ positions in the barycentric frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the position vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.KeplerianOrbit.get_planet_velocity">
+<code class="sig-name descname">get_planet_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.KeplerianOrbit.get_planet_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the planets’ velocity vectors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the velocity should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the velocity vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">M_sun/day</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.KeplerianOrbit.get_radial_velocity">
+<code class="sig-name descname">get_radial_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">K=None</em>, <em class="sig-param">output_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.KeplerianOrbit.get_radial_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the radial velocity of the star</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The convention in exoplanet is that positive <cite>z</cite> points
+<em>towards</em> the observer. However, for consistency with radial
+velocity literature this method returns values where positive
+radial velocity corresponds to a redshift as expected.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> – The times where the radial velocity should be evaluated.</p></li>
+<li><p><strong>K</strong> (<em>Optional</em>) – The semi-amplitudes of the orbits. If provided, the
+<code class="docutils literal notranslate"><span class="pre">m_planet</span></code> and <code class="docutils literal notranslate"><span class="pre">incl</span></code> parameters will be ignored and this
+amplitude will be used instead.</p></li>
+<li><p><strong>output_units</strong> (<em>Optional</em>) – An AstroPy velocity unit. If not given,
+the output will be evaluated in <code class="docutils literal notranslate"><span class="pre">m/s</span></code>. This is ignored if a
+value is given for <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The reflex radial velocity evaluated at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">output_units</span></code>. For multiple planets, this will have one row for
+each planet.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.KeplerianOrbit.get_relative_angles">
+<code class="sig-name descname">get_relative_angles</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">parallax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.KeplerianOrbit.get_relative_angles" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ relative position to the star in the sky plane, in
+separation, position angle coordinates.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This treats each planet independently and does not take the
+other planets into account when computing the position of the
+star. This is fine as long as the planet masses are small.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The separation (arcseconds) and position angle (radians,
+measured east of north) of the planet relative to the star.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.KeplerianOrbit.get_relative_position">
+<code class="sig-name descname">get_relative_position</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">parallax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.KeplerianOrbit.get_relative_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ positions relative to the star in the X,Y,Z frame.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This treats each planet independently and does not take the
+other planets into account when computing the position of the
+star. This is fine as long as the planet masses are small. In
+other words, the reflex motion of the star caused by the other
+planets is neglected when computing the relative coordinates of
+one of the planets.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the position vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.KeplerianOrbit.get_relative_velocity">
+<code class="sig-name descname">get_relative_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.KeplerianOrbit.get_relative_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ velocity relative to the star</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This treats each planet independently and does not take the
+other planets into account when computing the position of the
+star. This is fine as long as the planet masses are small.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the velocity should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the velocity vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun/day</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.KeplerianOrbit.get_star_position">
+<code class="sig-name descname">get_star_position</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">parallax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.KeplerianOrbit.get_star_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The star’s position in the barycentric frame</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If there are multiple planets in the system, this will
+return one column per planet with each planet’s contribution to
+the motion. The star’s full position can be computed by summing
+over the last axis.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the position vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.KeplerianOrbit.get_star_velocity">
+<code class="sig-name descname">get_star_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.KeplerianOrbit.get_star_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the star’s velocity vector</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a system with multiple planets, this will return one
+column per planet with the contributions from each planet. The
+total velocity can be found by summing along the last axis.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the velocity should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the velocity vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">M_sun/day</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.KeplerianOrbit.in_transit">
+<code class="sig-name descname">in_transit</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">r=0.0</em>, <em class="sig-param">texp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.KeplerianOrbit.in_transit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of timestamps that are in transit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>vector</em>) – A vector of timestamps to be evaluated.</p></li>
+<li><p><strong>r</strong> (<em>Optional</em>) – The radii of the planets.</p></li>
+<li><p><strong>texp</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – The exposure time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The indices of the timestamps that are in transit.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.orbits.TTVOrbit">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.orbits.</code><code class="sig-name descname">TTVOrbit</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.TTVOrbit" title="Permalink to this definition">¶</a></dt>
+<dd><p>A generalization of a Keplerian orbit with transit timing variations</p>
+<p>Only one of the arguments <code class="docutils literal notranslate"><span class="pre">ttvs</span></code> or <code class="docutils literal notranslate"><span class="pre">transit_times</span></code> can be given and
+the other will be computed from the one that was provided.</p>
+<p>In practice the way this works is that the time axis is shifted to account
+for the TTVs before solving for a standard Keplerian orbit. To identify
+which times corrorspond to which transits, this will find the closest
+labelled transit to the timestamp and adjust the timestamp accordingly.
+This means that things will go <em>very badly</em> if the time between
+neighboring transits is larger than <code class="docutils literal notranslate"><span class="pre">2*period</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ttvs</strong> – A list (with on entry for each planet) of “O-C” vectors for each
+transit of each planet in units of days. “O-C” means the
+difference between the observed transit time and the transit time
+expected for a regular periodic orbit.</p></li>
+<li><p><strong>transit_times</strong> – A list (with on entry for each planet) of transit times
+for each transit of each planet in units of days. These times will
+be used to compute the implied (least squares) <code class="docutils literal notranslate"><span class="pre">ttv_period</span></code> and
+<code class="docutils literal notranslate"><span class="pre">t0</span></code>. It is possible to supply a separate <code class="docutils literal notranslate"><span class="pre">period</span></code> parameter
+that will set the shape of the transits, but care should be taken
+to make sure that <code class="docutils literal notranslate"><span class="pre">period</span></code> and <code class="docutils literal notranslate"><span class="pre">ttv_period</span></code> don’t diverge
+because things will break if the time between neighboring transits
+is larger than <code class="docutils literal notranslate"><span class="pre">2*period</span></code>.</p></li>
+<li><p><strong>transit_inds</strong> – A list of integer value tensors giving the transit
+number for each transit in <code class="docutils literal notranslate"><span class="pre">transit_times''</span> <span class="pre">or</span> <span class="pre">``ttvs</span></code>. This is
+useful when not all transits are observed. This should always be
+zero indexed.</p></li>
+<li><p><strong>delta_log_period</strong> – If using the <code class="docutils literal notranslate"><span class="pre">transit_times</span></code> argument, this
+parameter specifies the difference (in natural log) between the
+leqast squares period and the effective period of the transit.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="exoplanet.orbits.TTVOrbit.get_planet_position">
+<code class="sig-name descname">get_planet_position</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">parallax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.TTVOrbit.get_planet_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ positions in the barycentric frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the position vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.TTVOrbit.get_planet_velocity">
+<code class="sig-name descname">get_planet_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.TTVOrbit.get_planet_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the planets’ velocity vectors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the velocity should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the velocity vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">M_sun/day</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.TTVOrbit.get_radial_velocity">
+<code class="sig-name descname">get_radial_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">K=None</em>, <em class="sig-param">output_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.TTVOrbit.get_radial_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the radial velocity of the star</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The convention in exoplanet is that positive <cite>z</cite> points
+<em>towards</em> the observer. However, for consistency with radial
+velocity literature this method returns values where positive
+radial velocity corresponds to a redshift as expected.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> – The times where the radial velocity should be evaluated.</p></li>
+<li><p><strong>K</strong> (<em>Optional</em>) – The semi-amplitudes of the orbits. If provided, the
+<code class="docutils literal notranslate"><span class="pre">m_planet</span></code> and <code class="docutils literal notranslate"><span class="pre">incl</span></code> parameters will be ignored and this
+amplitude will be used instead.</p></li>
+<li><p><strong>output_units</strong> (<em>Optional</em>) – An AstroPy velocity unit. If not given,
+the output will be evaluated in <code class="docutils literal notranslate"><span class="pre">m/s</span></code>. This is ignored if a
+value is given for <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The reflex radial velocity evaluated at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">output_units</span></code>. For multiple planets, this will have one row for
+each planet.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.TTVOrbit.get_relative_angles">
+<code class="sig-name descname">get_relative_angles</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">parallax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.TTVOrbit.get_relative_angles" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ relative position to the star in the sky plane, in
+separation, position angle coordinates.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This treats each planet independently and does not take the
+other planets into account when computing the position of the
+star. This is fine as long as the planet masses are small.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The separation (arcseconds) and position angle (radians,
+measured east of north) of the planet relative to the star.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.TTVOrbit.get_relative_position">
+<code class="sig-name descname">get_relative_position</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">parallax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.TTVOrbit.get_relative_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ positions relative to the star in the X,Y,Z frame.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This treats each planet independently and does not take the
+other planets into account when computing the position of the
+star. This is fine as long as the planet masses are small. In
+other words, the reflex motion of the star caused by the other
+planets is neglected when computing the relative coordinates of
+one of the planets.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the position vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.TTVOrbit.get_relative_velocity">
+<code class="sig-name descname">get_relative_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.TTVOrbit.get_relative_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ velocity relative to the star</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This treats each planet independently and does not take the
+other planets into account when computing the position of the
+star. This is fine as long as the planet masses are small.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the velocity should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the velocity vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun/day</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.TTVOrbit.get_star_position">
+<code class="sig-name descname">get_star_position</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">parallax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.TTVOrbit.get_star_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The star’s position in the barycentric frame</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If there are multiple planets in the system, this will
+return one column per planet with each planet’s contribution to
+the motion. The star’s full position can be computed by summing
+over the last axis.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the position vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.TTVOrbit.get_star_velocity">
+<code class="sig-name descname">get_star_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.TTVOrbit.get_star_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the star’s velocity vector</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a system with multiple planets, this will return one
+column per planet with the contributions from each planet. The
+total velocity can be found by summing along the last axis.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the velocity should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the velocity vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">M_sun/day</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.TTVOrbit.in_transit">
+<code class="sig-name descname">in_transit</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">r=0.0</em>, <em class="sig-param">texp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.TTVOrbit.in_transit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of timestamps that are in transit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>vector</em>) – A vector of timestamps to be evaluated.</p></li>
+<li><p><strong>r</strong> (<em>Optional</em>) – The radii of the planets.</p></li>
+<li><p><strong>texp</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – The exposure time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The indices of the timestamps that are in transit.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.orbits.ReboundOrbit">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.orbits.</code><code class="sig-name descname">ReboundOrbit</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ReboundOrbit" title="Permalink to this definition">¶</a></dt>
+<dd><p>An N-body system powered by the rebound integrator</p>
+<p>This takes all the same arguments as the <a class="reference internal" href="#exoplanet.orbits.KeplerianOrbit" title="exoplanet.orbits.KeplerianOrbit"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeplerianOrbit</span></code></a>, but
+these arguments define the orbital elements at some reference time (given
+by the <code class="docutils literal notranslate"><span class="pre">rebound_t</span></code> parameter). The positions and velocities of the bodies
+are then computed by numerically integrating the gravitational N-body
+system.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rebound</span></code>-specific parameters can be provided as keyword arguments
+prefixed by <code class="docutils literal notranslate"><span class="pre">rebound_</span></code>. These will then be applied to the
+<code class="docutils literal notranslate"><span class="pre">rebound.Simulation</span></code> object as properties. Therefore, if you want to
+change the integrator, you could use: <code class="docutils literal notranslate"><span class="pre">rebound_integrator</span> <span class="pre">=</span> <span class="pre">&quot;whfast&quot;</span></code>,
+for example. All of these parameters are passed directly through to
+<code class="docutils literal notranslate"><span class="pre">rebound</span></code> except <code class="docutils literal notranslate"><span class="pre">rebound_t</span></code> (the reference time) which is converted
+from days to years over two pi (the default time units in <code class="docutils literal notranslate"><span class="pre">rebound</span></code>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">exoplanet</span></code> and <code class="docutils literal notranslate"><span class="pre">rebound</span></code> use different base units, but all
+of the unit conversions are handled behind the scenes in this object
+so that means that you should mostly use the <code class="docutils literal notranslate"><span class="pre">exoplanet</span></code> units when
+interacting with this class and you should be very cautious about
+setting the <code class="docutils literal notranslate"><span class="pre">rebound_G</span></code> argument. One example of a case where you’ll
+need to use the <code class="docutils literal notranslate"><span class="pre">rebound</span></code> units is when you want to set the
+integrator step size using the <code class="docutils literal notranslate"><span class="pre">rebound_dt</span></code> parameter.</p>
+</div>
+<dl class="method">
+<dt id="exoplanet.orbits.ReboundOrbit.get_planet_position">
+<code class="sig-name descname">get_planet_position</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ReboundOrbit.get_planet_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ positions in the barycentric frame</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the position vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.ReboundOrbit.get_planet_velocity">
+<code class="sig-name descname">get_planet_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ReboundOrbit.get_planet_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the planets’ velocity vectors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the velocity should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the velocity vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">M_sun/day</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.ReboundOrbit.get_radial_velocity">
+<code class="sig-name descname">get_radial_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">output_units=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ReboundOrbit.get_radial_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the radial velocity of the star</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The convention in exoplanet is that positive <cite>z</cite> points
+<em>towards</em> the observer. However, for consistency with radial
+velocity literature this method returns values where positive
+radial velocity corresponds to a redshift as expected.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike the <a class="reference internal" href="#exoplanet.orbits.KeplerianOrbit" title="exoplanet.orbits.KeplerianOrbit"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeplerianOrbit</span></code></a> implementation, the
+semi-amplitude <code class="docutils literal notranslate"><span class="pre">K</span></code> cannot be used with the <a class="reference internal" href="#exoplanet.orbits.ReboundOrbit" title="exoplanet.orbits.ReboundOrbit"><code class="xref py py-class docutils literal notranslate"><span class="pre">ReboundOrbit</span></code></a>.
+Also, the contributions of each planet are not returned separately;
+this will always return a single time series.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> – The times where the radial velocity should be evaluated.</p></li>
+<li><p><strong>output_units</strong> (<em>Optional</em>) – An AstroPy velocity unit. If not given,
+the output will be evaluated in <code class="docutils literal notranslate"><span class="pre">m/s</span></code>. This is ignored if a
+value is given for <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The reflex radial velocity evaluated at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">output_units</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.ReboundOrbit.get_relative_angles">
+<code class="sig-name descname">get_relative_angles</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">parallax=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ReboundOrbit.get_relative_angles" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ relative position to the star in the sky plane, in
+separation, position angle coordinates.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This treats each planet independently and does not take the
+other planets into account when computing the position of the
+star. This is fine as long as the planet masses are small.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The separation (arcseconds) and position angle (radians,
+measured east of north) of the planet relative to the star.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.ReboundOrbit.get_relative_position">
+<code class="sig-name descname">get_relative_position</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ReboundOrbit.get_relative_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ positions relative to the star in the X,Y,Z frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the position vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.ReboundOrbit.get_relative_velocity">
+<code class="sig-name descname">get_relative_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ReboundOrbit.get_relative_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ velocity relative to the star</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the velocity should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the velocity vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun/day</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.ReboundOrbit.get_star_position">
+<code class="sig-name descname">get_star_position</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ReboundOrbit.get_star_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The star’s position in the barycentric frame</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike the <a class="reference internal" href="#exoplanet.orbits.KeplerianOrbit" title="exoplanet.orbits.KeplerianOrbit"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeplerianOrbit</span></code></a>, this will not return
+the contributions from each planet separately.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the position vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.ReboundOrbit.get_star_velocity">
+<code class="sig-name descname">get_star_velocity</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ReboundOrbit.get_star_velocity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the star’s velocity vector</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unlike the <a class="reference internal" href="#exoplanet.orbits.KeplerianOrbit" title="exoplanet.orbits.KeplerianOrbit"><code class="xref py py-class docutils literal notranslate"><span class="pre">KeplerianOrbit</span></code></a>, this will not return
+the contributions from each planet separately.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the velocity should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the velocity vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">M_sun/day</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.ReboundOrbit.in_transit">
+<code class="sig-name descname">in_transit</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">r=0.0</em>, <em class="sig-param">texp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ReboundOrbit.in_transit" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a no-op and all points are assumed to be in transit</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.orbits.SimpleTransitOrbit">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.orbits.</code><code class="sig-name descname">SimpleTransitOrbit</code><span class="sig-paren">(</span><em class="sig-param">period=None</em>, <em class="sig-param">t0=0.0</em>, <em class="sig-param">b=0.0</em>, <em class="sig-param">duration=None</em>, <em class="sig-param">r_star=1.0</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.SimpleTransitOrbit" title="Permalink to this definition">¶</a></dt>
+<dd><p>An orbit representing a set of planets transiting a common central</p>
+<p>This orbit is parameterized by the observables of a transiting system,
+period, phase, duration, and impact parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>period</strong> – The orbital period of the planets in days.</p></li>
+<li><p><strong>t0</strong> – The midpoint time of a reference transit for each planet in days.</p></li>
+<li><p><strong>b</strong> – The impact parameters of the orbits.</p></li>
+<li><p><strong>duration</strong> – The durations of the transits in days.</p></li>
+<li><p><strong>r_star</strong> – The radius of the star in <code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="exoplanet.orbits.SimpleTransitOrbit.get_relative_position">
+<code class="sig-name descname">get_relative_position</code><span class="sig-paren">(</span><em class="sig-param">t</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.SimpleTransitOrbit.get_relative_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>The planets’ positions relative to the star</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> – The times where the position should be evaluated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The components of the position vector at <code class="docutils literal notranslate"><span class="pre">t</span></code> in units of
+<code class="docutils literal notranslate"><span class="pre">R_sun</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="exoplanet.orbits.SimpleTransitOrbit.in_transit">
+<code class="sig-name descname">in_transit</code><span class="sig-paren">(</span><em class="sig-param">t</em>, <em class="sig-param">r=None</em>, <em class="sig-param">texp=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.SimpleTransitOrbit.in_transit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of timestamps that are in transit</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>vector</em>) – A vector of timestamps to be evaluated.</p></li>
+<li><p><strong>r</strong> (<em>Optional</em>) – The radii of the planets.</p></li>
+<li><p><strong>texp</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – The exposure time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The indices of the timestamps that are in transit.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="light-curve-models">
+<h2>Light curve models<a class="headerlink" href="#light-curve-models" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="exoplanet.LimbDarkLightCurve">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.</code><code class="sig-name descname">LimbDarkLightCurve</code><span class="sig-paren">(</span><em class="sig-param">u</em>, <em class="sig-param">model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.LimbDarkLightCurve" title="Permalink to this definition">¶</a></dt>
+<dd><p>A limb darkened light curve computed using starry</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>u</strong> (<em>vector</em>) – A vector of limb darkening coefficients.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="exoplanet.LimbDarkLightCurve.get_light_curve">
+<code class="sig-name descname">get_light_curve</code><span class="sig-paren">(</span><em class="sig-param">orbit=None</em>, <em class="sig-param">r=None</em>, <em class="sig-param">t=None</em>, <em class="sig-param">texp=None</em>, <em class="sig-param">oversample=7</em>, <em class="sig-param">order=0</em>, <em class="sig-param">use_in_transit=True</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.LimbDarkLightCurve.get_light_curve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the light curve for an orbit at a set of times</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>orbit</strong> – An object with a <code class="docutils literal notranslate"><span class="pre">get_relative_position</span></code> method that
+takes a tensor of times and returns a list of Cartesian
+coordinates of a set of bodies relative to the central source.
+This method should return three tensors (one for each
+coordinate dimension) and each tensor should have the shape
+<code class="docutils literal notranslate"><span class="pre">append(t.shape,</span> <span class="pre">r.shape)</span></code> or <code class="docutils literal notranslate"><span class="pre">append(t.shape,</span> <span class="pre">oversample,</span>
+<span class="pre">r.shape)</span></code> when <code class="docutils literal notranslate"><span class="pre">texp</span></code> is given. The first two coordinate
+dimensions are treated as being in the plane of the sky and the
+third coordinate is the line of sight with positive values
+pointing <em>away</em> from the observer. For an example, take a look
+at <a class="reference internal" href="#exoplanet.orbits.KeplerianOrbit" title="exoplanet.orbits.KeplerianOrbit"><code class="xref py py-class docutils literal notranslate"><span class="pre">orbits.KeplerianOrbit</span></code></a>.</p></li>
+<li><p><strong>r</strong> (<em>tensor</em>) – The radius of the transiting body in the same units as
+<code class="docutils literal notranslate"><span class="pre">r_star</span></code>. This should have a shape that is consistent with
+the coordinates returned by <code class="docutils literal notranslate"><span class="pre">orbit</span></code>. In general, this means
+that it should probably be a scalar or a vector with one entry
+for each body in <code class="docutils literal notranslate"><span class="pre">orbit</span></code>.</p></li>
+<li><p><strong>t</strong> (<em>tensor</em>) – The times where the light curve should be evaluated.</p></li>
+<li><p><strong>texp</strong> (<em>Optional</em><em>[</em><em>tensor</em><em>]</em>) – The exposure time of each observation.
+This can be a scalar or a tensor with the same shape as <code class="docutils literal notranslate"><span class="pre">t</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">texp</span></code> is provided, <code class="docutils literal notranslate"><span class="pre">t</span></code> is assumed to indicate the
+timestamp at the <em>middle</em> of an exposure of length <code class="docutils literal notranslate"><span class="pre">texp</span></code>.</p></li>
+<li><p><strong>oversample</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>]</em>) – The number of function evaluations to
+use when numerically integrating the exposure time.</p></li>
+<li><p><strong>order</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>]</em>) – The order of the numerical integration
+scheme. This must be one of the following: <code class="docutils literal notranslate"><span class="pre">0</span></code> for a
+centered Riemann sum (equivalent to the “resampling” procedure
+suggested by Kipping 2010), <code class="docutils literal notranslate"><span class="pre">1</span></code> for the trapezoid rule, or
+<code class="docutils literal notranslate"><span class="pre">2</span></code> for Simpson’s rule.</p></li>
+<li><p><strong>use_in_transit</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>]</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, the model will only
+be evaluated for the data points expected to be in transit
+as computed using the <code class="docutils literal notranslate"><span class="pre">in_transit</span></code> method on <code class="docutils literal notranslate"><span class="pre">orbit</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="scalable-gaussian-processes">
+<h2>Scalable Gaussian processes<a class="headerlink" href="#scalable-gaussian-processes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="exoplanet.gp.GP">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.gp.</code><code class="sig-name descname">GP</code><span class="sig-paren">(</span><em class="sig-param">kernel</em>, <em class="sig-param">x</em>, <em class="sig-param">diag=None</em>, <em class="sig-param">mean=&lt;exoplanet.gp.means.Zero object&gt;</em>, <em class="sig-param">J=-1</em>, <em class="sig-param">model=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.gp.GP" title="Permalink to this definition">¶</a></dt>
+<dd><p>The interface for computing Gaussian Process models with celerite</p>
+<p>This class implements the method described in <a class="reference external" href="https://arxiv.org/abs/1703.09710">Foreman-Mackey et al. (2017)</a> and <a class="reference external" href="https://arxiv.org/abs/1801.10156">Foreman-Mackey (2018)</a> for scalable evaluation of Gaussian
+Process (GP) models in 1D.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The input coordinates <code class="docutils literal notranslate"><span class="pre">x</span></code> must be sorted in ascending order,
+but this is not checked in the code. If the values are not sorted, the
+behavior of the algorithm is undefined.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>kernel</strong> – A <a class="reference internal" href="#exoplanet.gp.terms.Term" title="exoplanet.gp.terms.Term"><code class="xref py py-class docutils literal notranslate"><span class="pre">exoplanet.gp.terms.Term</span></code></a> object the specifies the
+GP kernel.</p></li>
+<li><p><strong>x</strong> – The input coordinates. This should be a 1D array and the elements
+must be sorted. Otherwise the results are undefined.</p></li>
+<li><p><strong>diag</strong> (<em>Optional</em>) – The extra diagonal to add to the covariance matrix.
+This should have the same length as <code class="docutils literal notranslate"><span class="pre">x</span></code> and correspond to the
+excess <em>variance</em> for each data point. <strong>Note:</strong> this is different
+from the usage in the <code class="docutils literal notranslate"><span class="pre">celerite</span></code> package where the standard
+deviation (instead of variance) is provided.</p></li>
+<li><p><strong>mean</strong> (<em>Optional</em>) – The mean function for the GP. This can be a constant
+scalar value or a callable that will be called with a single, one
+dimensional tensor argument specifying the input coordinates where
+the mean should be evaluated.</p></li>
+<li><p><strong>J</strong> (<em>Optional</em>) – <p>The width of the system. This is the <code class="docutils literal notranslate"><span class="pre">J</span></code> parameter
+from <a class="reference external" href="https://arxiv.org/abs/1801.10156">Foreman-Mackey (2018)</a>
+(not the original paper) so a real term contributes <code class="docutils literal notranslate"><span class="pre">J</span> <span class="pre">+=</span> <span class="pre">1</span></code> and
+a complex term contributes <code class="docutils literal notranslate"><span class="pre">J</span> <span class="pre">+=</span> <span class="pre">2</span></code>. If you know this value in
+advance, you can provide it. Otherwise, the code will try to work
+it out.</p>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.gp.terms.Term">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.gp.terms.</code><code class="sig-name descname">Term</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.gp.terms.Term" title="Permalink to this definition">¶</a></dt>
+<dd><p>The abstract base “term” that is the superclass of all other terms</p>
+<p>Subclasses should overload the <code class="xref py py-func docutils literal notranslate"><span class="pre">terms.Term.get_real_coefficients()</span></code>
+and <code class="xref py py-func docutils literal notranslate"><span class="pre">terms.Term.get_complex_coefficients()</span></code> methods.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.gp.terms.RealTerm">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.gp.terms.</code><code class="sig-name descname">RealTerm</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.gp.terms.RealTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>The simplest celerite term</p>
+<p>This term has the form</p>
+<div class="math notranslate nohighlight">
+\[k(\tau) = a_j\,e^{-c_j\,\tau}\]</div>
+<p>with the parameters <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">c</span></code>.</p>
+<p>Strictly speaking, for a sum of terms, the parameter <code class="docutils literal notranslate"><span class="pre">a</span></code> could be
+allowed to go negative but since it is somewhat subtle to ensure positive
+definiteness, we recommend keeping both parameters strictly positive.
+Advanced users can build a custom term that has negative coefficients but
+care should be taken to ensure positivity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong><strong> or </strong><strong>log_a</strong> (<em>tensor</em>) – The amplitude of the term.</p></li>
+<li><p><strong>c</strong><strong> or </strong><strong>log_c</strong> (<em>tensor</em>) – The exponent of the term.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.gp.terms.ComplexTerm">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.gp.terms.</code><code class="sig-name descname">ComplexTerm</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.gp.terms.ComplexTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>A general celerite term</p>
+<p>This term has the form</p>
+<div class="math notranslate nohighlight">
+\[k(\tau) = \frac{1}{2}\,\left[(a_j + b_j)\,e^{-(c_j+d_j)\,\tau}
+ + (a_j - b_j)\,e^{-(c_j-d_j)\,\tau}\right]\]</div>
+<p>with the parameters <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">b</span></code>, <code class="docutils literal notranslate"><span class="pre">c</span></code>, and <code class="docutils literal notranslate"><span class="pre">d</span></code>.</p>
+<p>This term will only correspond to a positive definite kernel (on its own)
+if <span class="math notranslate nohighlight">\(a_j\,c_j \ge b_j\,d_j\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong><strong> or </strong><strong>log_a</strong> (<em>tensor</em>) – The real part of amplitude.</p></li>
+<li><p><strong>b</strong><strong> or </strong><strong>log_b</strong> (<em>tensor</em>) – The imaginary part of amplitude.</p></li>
+<li><p><strong>c</strong><strong> or </strong><strong>log_c</strong> (<em>tensor</em>) – The real part of the exponent.</p></li>
+<li><p><strong>d</strong><strong> or </strong><strong>log_d</strong> (<em>tensor</em>) – The imaginary part of exponent.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.gp.terms.SHOTerm">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.gp.terms.</code><code class="sig-name descname">SHOTerm</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.gp.terms.SHOTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>A term representing a stochastically-driven, damped harmonic oscillator</p>
+<p>The PSD of this term is</p>
+<div class="math notranslate nohighlight">
+\[S(\omega) = \sqrt{\frac{2}{\pi}} \frac{S_0\,\omega_0^4}
+{(\omega^2-{\omega_0}^2)^2 + {\omega_0}^2\,\omega^2/Q^2}\]</div>
+<p>with the parameters <code class="docutils literal notranslate"><span class="pre">S0</span></code>, <code class="docutils literal notranslate"><span class="pre">Q</span></code>, and <code class="docutils literal notranslate"><span class="pre">w0</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S0</strong><strong> or </strong><strong>log_S0</strong> (<em>tensor</em>) – The parameter <span class="math notranslate nohighlight">\(S_0\)</span>.</p></li>
+<li><p><strong>Q</strong><strong> or </strong><strong>log_Q</strong> (<em>tensor</em>) – The parameter <span class="math notranslate nohighlight">\(Q\)</span>.</p></li>
+<li><p><strong>w0</strong><strong> or </strong><strong>log_w0</strong> (<em>tensor</em>) – The parameter <span class="math notranslate nohighlight">\(\omega_0\)</span>.</p></li>
+<li><p><strong>Sw4</strong><strong> or </strong><strong>log_Sw4</strong> (<em>tensor</em>) – It can sometimes be more efficient to
+parameterize the amplitude of a SHO kernel using
+<span class="math notranslate nohighlight">\(S_0\,{\omega_0}^4\)</span> instead of <span class="math notranslate nohighlight">\(S_0\)</span> directly since
+<span class="math notranslate nohighlight">\(S_0\)</span> and <span class="math notranslate nohighlight">\(\omega_0\)</span> are strongly correlated. If
+provided, <code class="docutils literal notranslate"><span class="pre">S0</span></code> will be computed from <code class="docutils literal notranslate"><span class="pre">Sw4</span></code> and <code class="docutils literal notranslate"><span class="pre">w0</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.gp.terms.Matern32Term">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.gp.terms.</code><code class="sig-name descname">Matern32Term</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.gp.terms.Matern32Term" title="Permalink to this definition">¶</a></dt>
+<dd><p>A term that approximates a Matern-3/2 function</p>
+<p>This term is defined as</p>
+<div class="math notranslate nohighlight">
+\[k(\tau) = \sigma^2\,\left[
+    \left(1+1/\epsilon\right)\,e^{-(1-\epsilon)\sqrt{3}\,\tau/\rho}
+    \left(1-1/\epsilon\right)\,e^{-(1+\epsilon)\sqrt{3}\,\tau/\rho}
+\right]\]</div>
+<p>with the parameters <code class="docutils literal notranslate"><span class="pre">sigma</span></code> and <code class="docutils literal notranslate"><span class="pre">rho</span></code>. The parameter <code class="docutils literal notranslate"><span class="pre">eps</span></code>
+controls the quality of the approximation since, in the limit
+<span class="math notranslate nohighlight">\(\epsilon \to 0\)</span> this becomes the Matern-3/2 function</p>
+<div class="math notranslate nohighlight">
+\[\lim_{\epsilon \to 0} k(\tau) = \sigma^2\,\left(1+
+\frac{\sqrt{3}\,\tau}{\rho}\right)\,
+\exp\left(-\frac{\sqrt{3}\,\tau}{\rho}\right)\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>sigma</strong><strong> or </strong><strong>log_sigma</strong> (<em>tensor</em>) – The parameter <span class="math notranslate nohighlight">\(\sigma\)</span>.</p></li>
+<li><p><strong>rho</strong><strong> or </strong><strong>log_rho</strong> (<em>tensor</em>) – The parameter <span class="math notranslate nohighlight">\(\rho\)</span>.</p></li>
+<li><p><strong>eps</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – The value of the parameter <span class="math notranslate nohighlight">\(\epsilon\)</span>.
+(default: <cite>0.01</cite>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.gp.terms.RotationTerm">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.gp.terms.</code><code class="sig-name descname">RotationTerm</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.gp.terms.RotationTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>A mixture of two SHO terms that can be used to model stellar rotation</p>
+<p>This term has two modes in Fourier space: one at <code class="docutils literal notranslate"><span class="pre">period</span></code> and one at
+<code class="docutils literal notranslate"><span class="pre">0.5</span> <span class="pre">*</span> <span class="pre">period</span></code>. This can be a good descriptive model for a wide range of
+stochastic variability in stellar time series from rotation to pulsations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>amp</strong><strong> or </strong><strong>log_amp</strong> (<em>tensor</em>) – The amplitude of the variability.</p></li>
+<li><p><strong>period</strong><strong> or </strong><strong>log_period</strong> (<em>tensor</em>) – The primary period of variability.</p></li>
+<li><p><strong>Q0</strong><strong> or </strong><strong>log_Q0</strong> (<em>tensor</em>) – The quality factor (or really the quality factor
+minus one half) for the secondary oscillation.</p></li>
+<li><p><strong>deltaQ</strong><strong> or </strong><strong>log_deltaQ</strong> (<em>tensor</em>) – The difference between the quality factors
+of the first and the second modes. This parameterization (if
+<code class="docutils literal notranslate"><span class="pre">deltaQ</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>) ensures that the primary mode alway has higher
+quality.</p></li>
+<li><p><strong>mix</strong> – The fractional amplitude of the secondary mode compared to the
+primary. This should probably always be <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">mix</span> <span class="pre">&lt;</span> <span class="pre">1</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="estimators">
+<h2>Estimators<a class="headerlink" href="#estimators" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="exoplanet.estimate_semi_amplitude">
+<code class="sig-prename descclassname">exoplanet.</code><code class="sig-name descname">estimate_semi_amplitude</code><span class="sig-paren">(</span><em class="sig-param">periods</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">yerr=None</em>, <em class="sig-param">t0s=None</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.estimate_semi_amplitude" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate the RV semi-amplitudes for planets in an RV series</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>periods</strong> – The periods of the planets. Assumed to be in <code class="docutils literal notranslate"><span class="pre">days</span></code> if not
+an AstroPy Quantity.</p></li>
+<li><p><strong>x</strong> – The observation times. Assumed to be in <code class="docutils literal notranslate"><span class="pre">days</span></code> if not an AstroPy
+Quantity.</p></li>
+<li><p><strong>y</strong> – The radial velocities. Assumed to be in <code class="docutils literal notranslate"><span class="pre">m/s</span></code> if not an AstroPy
+Quantity.</p></li>
+<li><p><strong>yerr</strong> (<em>Optional</em>) – The uncertainty on <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p><strong>t0s</strong> (<em>Optional</em>) – The time of a reference transit for each planet, if
+known.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An estimate of the semi-amplitude of each planet in units of <code class="docutils literal notranslate"><span class="pre">m/s</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="exoplanet.estimate_minimum_mass">
+<code class="sig-prename descclassname">exoplanet.</code><code class="sig-name descname">estimate_minimum_mass</code><span class="sig-paren">(</span><em class="sig-param">periods</em>, <em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">yerr=None</em>, <em class="sig-param">t0s=None</em>, <em class="sig-param">m_star=1</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.estimate_minimum_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate the minimum mass(es) for planets in an RV series</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>periods</strong> – The periods of the planets. Assumed to be in <code class="docutils literal notranslate"><span class="pre">days</span></code> if not
+an AstroPy Quantity.</p></li>
+<li><p><strong>x</strong> – The observation times. Assumed to be in <code class="docutils literal notranslate"><span class="pre">days</span></code> if not an AstroPy
+Quantity.</p></li>
+<li><p><strong>y</strong> – The radial velocities. Assumed to be in <code class="docutils literal notranslate"><span class="pre">m/s</span></code> if not an AstroPy
+Quantity.</p></li>
+<li><p><strong>yerr</strong> (<em>Optional</em>) – The uncertainty on <code class="docutils literal notranslate"><span class="pre">y</span></code>.</p></li>
+<li><p><strong>t0s</strong> (<em>Optional</em>) – The time of a reference transit for each planet, if
+known.</p></li>
+<li><p><strong>m_star</strong> (<em>Optional</em>) – The mass of the star. Assumed to be in <code class="docutils literal notranslate"><span class="pre">M_sun</span></code>
+if not an AstroPy Quantity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An estimate of the minimum mass of each planet as an AstroPy Quantity
+with units of <code class="docutils literal notranslate"><span class="pre">M_jupiter</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="exoplanet.lomb_scargle_estimator">
+<code class="sig-prename descclassname">exoplanet.</code><code class="sig-name descname">lomb_scargle_estimator</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">yerr=None</em>, <em class="sig-param">min_period=None</em>, <em class="sig-param">max_period=None</em>, <em class="sig-param">filter_period=None</em>, <em class="sig-param">max_peaks=2</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.lomb_scargle_estimator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate period of a time series using the periodogram</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em><em>[</em><em>N</em><em>]</em>) – The times of the observations</p></li>
+<li><p><strong>y</strong> (<em>ndarray</em><em>[</em><em>N</em><em>]</em>) – The observations at times <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+<li><p><strong>yerr</strong> (<em>Optional</em><em>[</em><em>ndarray</em><em>[</em><em>N</em><em>]</em><em>]</em>) – The uncertainties on <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p><strong>min_period</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – The minimum period to consider</p></li>
+<li><p><strong>max_period</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – The maximum period to consider</p></li>
+<li><p><strong>filter_period</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – If given, use a high-pass filter to
+down-weight period longer than this</p></li>
+<li><p><strong>max_peaks</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>]</em>) – The maximum number of peaks to return
+(default: 2)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary with the computed <code class="docutils literal notranslate"><span class="pre">periodogram</span></code> and the parameters for
+up to <code class="docutils literal notranslate"><span class="pre">max_peaks</span></code> peaks in the periodogram.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="exoplanet.autocorr_estimator">
+<code class="sig-prename descclassname">exoplanet.</code><code class="sig-name descname">autocorr_estimator</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">y</em>, <em class="sig-param">yerr=None</em>, <em class="sig-param">min_period=None</em>, <em class="sig-param">max_period=None</em>, <em class="sig-param">oversample=2.0</em>, <em class="sig-param">smooth=2.0</em>, <em class="sig-param">max_peaks=10</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.autocorr_estimator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate the period of a time series using the autocorrelation function</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The signal is interpolated onto a uniform grid in time so that
+the autocorrelation function can be computed.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> (<em>ndarray</em><em>[</em><em>N</em><em>]</em>) – The times of the observations</p></li>
+<li><p><strong>y</strong> (<em>ndarray</em><em>[</em><em>N</em><em>]</em>) – The observations at times <code class="docutils literal notranslate"><span class="pre">x</span></code></p></li>
+<li><p><strong>yerr</strong> (<em>Optional</em><em>[</em><em>ndarray</em><em>[</em><em>N</em><em>]</em><em>]</em>) – The uncertainties on <code class="docutils literal notranslate"><span class="pre">y</span></code></p></li>
+<li><p><strong>min_period</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – The minimum period to consider</p></li>
+<li><p><strong>max_period</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – The maximum period to consider</p></li>
+<li><p><strong>oversample</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – When interpolating, oversample the times
+by this factor (default: 2.0)</p></li>
+<li><p><strong>smooth</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a><em>]</em>) – Smooth the autocorrelation function by this
+factor times the minimum period (default: 2.0)</p></li>
+<li><p><strong>max_peaks</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>]</em>) – The maximum number of peaks to identify in
+the autocorrelation function (default: 10)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary with the computed autocorrelation function and the
+estimated period. For compatibility with the
+<a class="reference internal" href="#exoplanet.lomb_scargle_estimator" title="exoplanet.lomb_scargle_estimator"><code class="xref py py-func docutils literal notranslate"><span class="pre">lomb_scargle_estimator()</span></code></a>, the period is returned as a list with
+the key <code class="docutils literal notranslate"><span class="pre">peaks</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="distributions">
+<h2>Distributions<a class="headerlink" href="#distributions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-distributions">
+<h3>Base distributions<a class="headerlink" href="#base-distributions" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="exoplanet.distributions.UnitUniform">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.distributions.</code><code class="sig-name descname">UnitUniform</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.distributions.UnitUniform" title="Permalink to this definition">¶</a></dt>
+<dd><p>A uniform distribution between zero and one</p>
+<p>This can sometimes get better performance than <code class="docutils literal notranslate"><span class="pre">pm.Uniform.dist(0,</span> <span class="pre">1)</span></code>.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.distributions.UnitVector">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.distributions.</code><code class="sig-name descname">UnitVector</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.distributions.UnitVector" title="Permalink to this definition">¶</a></dt>
+<dd><p>A vector where the sum of squares is fixed to unity</p>
+<p>For a multidimensional shape, the normalization is performed along the
+last dimension.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.distributions.Angle">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.distributions.</code><code class="sig-name descname">Angle</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.distributions.Angle" title="Permalink to this definition">¶</a></dt>
+<dd><p>An angle constrained to be in the range -pi to pi</p>
+<p>The actual sampling is performed in the two dimensional vector space
+<code class="docutils literal notranslate"><span class="pre">(sin(theta),</span> <span class="pre">cos(theta))</span></code> so that the sampler doesn’t see a
+discontinuity at pi.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.distributions.Periodic">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.distributions.</code><code class="sig-name descname">Periodic</code><span class="sig-paren">(</span><em class="sig-param">lower=0</em>, <em class="sig-param">upper=1</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.distributions.Periodic" title="Permalink to this definition">¶</a></dt>
+<dd><p>An periodic parameter in a given range</p>
+<p>Like the <a class="reference internal" href="#exoplanet.distributions.Angle" title="exoplanet.distributions.Angle"><code class="xref py py-class docutils literal notranslate"><span class="pre">Angle</span></code></a> distribution, the actual sampling is performed in
+a two dimensional vector space <code class="docutils literal notranslate"><span class="pre">(sin(theta),</span> <span class="pre">cos(theta))</span></code> and then
+transformed into the range <code class="docutils literal notranslate"><span class="pre">[lower,</span> <span class="pre">upper)</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lower</strong> – The lower bound on the range.</p></li>
+<li><p><strong>upper</strong> – The upper bound on the range.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="physical-distributions">
+<h3>Physical distributions<a class="headerlink" href="#physical-distributions" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="exoplanet.distributions.QuadLimbDark">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.distributions.</code><code class="sig-name descname">QuadLimbDark</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.distributions.QuadLimbDark" title="Permalink to this definition">¶</a></dt>
+<dd><p>An uninformative prior for quadratic limb darkening parameters</p>
+<p>This is an implementation of the <a class="reference external" href="https://arxiv.org/abs/1308.0009">Kipping (2013)</a> reparameterization of the
+two-parameter limb darkening model to allow for efficient and
+uninformative sampling.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="exoplanet.distributions.ImpactParameter">
+<em class="property">class </em><code class="sig-prename descclassname">exoplanet.distributions.</code><code class="sig-name descname">ImpactParameter</code><span class="sig-paren">(</span><em class="sig-param">ror=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.distributions.ImpactParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>The impact parameter distribution for a transiting planet</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ror</strong> – A scalar, tensor, or PyMC3 distribution representing the radius
+ratio between the planet and star. Conditioned on a value of
+<code class="docutils literal notranslate"><span class="pre">ror</span></code>, this will be uniformly distributed between <code class="docutils literal notranslate"><span class="pre">0</span></code> and
+<code class="docutils literal notranslate"><span class="pre">1+ror</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="eccentricity-distributions">
+<h3>Eccentricity distributions<a class="headerlink" href="#eccentricity-distributions" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="exoplanet.distributions.eccentricity.kipping13">
+<code class="sig-prename descclassname">exoplanet.distributions.eccentricity.</code><code class="sig-name descname">kipping13</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">fixed=False</em>, <em class="sig-param">long=None</em>, <em class="sig-param">model=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.distributions.eccentricity.kipping13" title="Permalink to this definition">¶</a></dt>
+<dd><p>The beta eccentricity distribution fit by Kipping (2013)</p>
+<p>The beta distribution parameters fit by <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2013MNRAS.434L..51K/abstract">Kipping (2013)</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The name of the eccentricity variable.</p></li>
+<li><p><strong>fixed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, use the posterior median
+hyperparameters. Otherwise, marginalize over the parameters.</p></li>
+<li><p><strong>long</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, use the parameters for the long
+period fit. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, use the parameters for the short period
+fit. If not given, the parameters fit using the full dataset are
+used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The eccentricity distribution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="exoplanet.distributions.eccentricity.vaneylen19">
+<code class="sig-prename descclassname">exoplanet.distributions.eccentricity.</code><code class="sig-name descname">vaneylen19</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">fixed=False</em>, <em class="sig-param">multi=False</em>, <em class="sig-param">model=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.distributions.eccentricity.vaneylen19" title="Permalink to this definition">¶</a></dt>
+<dd><p>The eccentricity distribution for small planets</p>
+<p>The mixture distribution fit by <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2019AJ....157...61V">Van Eylen et al. (2019)</a> to a population
+of well-characterized small transiting planets observed by Kepler.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><em>str</em></a>) – The name of the eccentricity variable.</p></li>
+<li><p><strong>fixed</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, use the posterior median
+hyperparameters. Otherwise, marginalize over the parameters.</p></li>
+<li><p><strong>multi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code>, use the distribution for systems
+with multiple transiting planets. If <code class="docutils literal notranslate"><span class="pre">False</span></code> (default), use the
+distribution for systems with only one detected transiting planet.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The eccentricity distribution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="utilities">
+<h2>Utilities<a class="headerlink" href="#utilities" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="exoplanet.optimize">
+<code class="sig-prename descclassname">exoplanet.</code><code class="sig-name descname">optimize</code><span class="sig-paren">(</span><em class="sig-param">start=None</em>, <em class="sig-param">vars=None</em>, <em class="sig-param">model=None</em>, <em class="sig-param">return_info=False</em>, <em class="sig-param">verbose=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximize the log prob of a PyMC3 model using scipy</p>
+<p>All extra arguments are passed directly to the <code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code>
+function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> – The PyMC3 coordinate dictionary of the starting position</p></li>
+<li><p><strong>vars</strong> – The variables to optimize</p></li>
+<li><p><strong>model</strong> – The PyMC3 model</p></li>
+<li><p><strong>return_info</strong> – Return both the coordinate dictionary and the result of
+<code class="docutils literal notranslate"><span class="pre">scipy.optimize.minimize</span></code></p></li>
+<li><p><strong>verbose</strong> – Print the success flag and log probability to the screen</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="exoplanet.eval_in_model">
+<code class="sig-prename descclassname">exoplanet.</code><code class="sig-name descname">eval_in_model</code><span class="sig-paren">(</span><em class="sig-param">var</em>, <em class="sig-param">point=None</em>, <em class="sig-param">return_func=False</em>, <em class="sig-param">model=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.eval_in_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Evaluate a Theano tensor or PyMC3 variable in a PyMC3 model</p>
+<p>This method builds a Theano function for evaluating a node in the graph
+given the required parameters. This will also cache the compiled Theano
+function in the current <code class="docutils literal notranslate"><span class="pre">pymc3.Model</span></code> to reduce the overhead of calling
+this function many times.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>var</strong> – The variable or tensor to evaluate.</p></li>
+<li><p><strong>point</strong> (<em>Optional</em>) – A <code class="docutils literal notranslate"><span class="pre">dict</span></code> of input parameter values. This can be
+<code class="docutils literal notranslate"><span class="pre">model.test_point</span></code> (default), the result of <code class="docutils literal notranslate"><span class="pre">pymc3.find_MAP</span></code>,
+a point in a <code class="docutils literal notranslate"><span class="pre">pymc3.MultiTrace</span></code> or any other representation of
+the input parameters.</p></li>
+<li><p><strong>return_func</strong> (<em>Optional</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>]</em>) – If <code class="docutils literal notranslate"><span class="pre">False</span></code> (default), return the
+evaluated variable. If <code class="docutils literal notranslate"><span class="pre">True</span></code>, return the result, the Theano
+function and the list of arguments for that function.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Depending on <code class="docutils literal notranslate"><span class="pre">return_func</span></code>, either the value of <code class="docutils literal notranslate"><span class="pre">var</span></code> at <code class="docutils literal notranslate"><span class="pre">point</span></code>,
+or this value, the Theano function, and the input arguments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="exoplanet.get_samples_from_trace">
+<code class="sig-prename descclassname">exoplanet.</code><code class="sig-name descname">get_samples_from_trace</code><span class="sig-paren">(</span><em class="sig-param">trace</em>, <em class="sig-param">size=1</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.get_samples_from_trace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate random samples from a PyMC3 MultiTrace</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>trace</strong> – The <code class="docutils literal notranslate"><span class="pre">MultiTrace</span></code>.</p></li>
+<li><p><strong>size</strong> – The number of samples to generate.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="exoplanet.get_dense_nuts_step">
+<code class="sig-prename descclassname">exoplanet.</code><code class="sig-name descname">get_dense_nuts_step</code><span class="sig-paren">(</span><em class="sig-param">start=None</em>, <em class="sig-param">adaptation_window=101</em>, <em class="sig-param">doubling=True</em>, <em class="sig-param">model=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.get_dense_nuts_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a NUTS step function with a dense mass matrix</p>
+<p>The entries in the mass matrix will be tuned based on the sample
+covariances during tuning. All extra arguments are passed directly to
+<code class="docutils literal notranslate"><span class="pre">pymc3.NUTS</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.8)"><em>dict</em></a><em>, </em><em>optional</em>) – A starting point in parameter space. If not
+provided, the model’s <code class="docutils literal notranslate"><span class="pre">test_point</span></code> is used.</p></li>
+<li><p><strong>adaptation_window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.8)"><em>int</em></a><em>, </em><em>optional</em>) – The (initial) size of the window
+used for sample covariance estimation.</p></li>
+<li><p><strong>doubling</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><em>bool</em></a><em>, </em><em>optional</em>) – If <code class="docutils literal notranslate"><span class="pre">True</span></code> (default) the adaptation window
+is doubled each time the matrix is updated.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="exoplanet.orbits.ttv.compute_expected_transit_times">
+<code class="sig-prename descclassname">exoplanet.orbits.ttv.</code><code class="sig-name descname">compute_expected_transit_times</code><span class="sig-paren">(</span><em class="sig-param">min_time</em>, <em class="sig-param">max_time</em>, <em class="sig-param">period</em>, <em class="sig-param">t0</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.orbits.ttv.compute_expected_transit_times" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the expected transit times within a dataset</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>min_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – The start time of the dataset</p></li>
+<li><p><strong>max_time</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.8)"><em>float</em></a>) – The end time of the dataset</p></li>
+<li><p><strong>period</strong> (<em>array</em>) – The periods of the planets</p></li>
+<li><p><strong>t0</strong> (<em>array</em>) – The reference transit times for the planets</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of arrays of expected transit times for each planet</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="units">
+<h2>Units<a class="headerlink" href="#units" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="exoplanet.units.with_unit">
+<code class="sig-prename descclassname">exoplanet.units.</code><code class="sig-name descname">with_unit</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">unit</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.units.with_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorate a Theano tensor with Astropy units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> – The Theano tensor</p></li>
+<li><p><strong>unit</strong> (<em>astropy.Unit</em>) – The units for this object</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.8)"><strong>TypeError</strong></a> – If the tensor already has units</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="exoplanet.units.has_unit">
+<code class="sig-prename descclassname">exoplanet.units.</code><code class="sig-name descname">has_unit</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.units.has_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Does an object have units as defined by exoplanet?</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="exoplanet.units.to_unit">
+<code class="sig-prename descclassname">exoplanet.units.</code><code class="sig-name descname">to_unit</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">target</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.units.to_unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a Theano tensor with units to a target set of units</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> – The Theano tensor</p></li>
+<li><p><strong>target</strong> (<em>astropy.Unit</em>) – The target units</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A Theano tensor in the right units</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="citations">
+<h2>Citations<a class="headerlink" href="#citations" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="exoplanet.citations.get_citations_for_model">
+<code class="sig-prename descclassname">exoplanet.citations.</code><code class="sig-name descname">get_citations_for_model</code><span class="sig-paren">(</span><em class="sig-param">model=None</em>, <em class="sig-param">width=79</em><span class="sig-paren">)</span><a class="headerlink" href="#exoplanet.citations.get_citations_for_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the citations for the components used an exoplanet PyMC3</p>
+<p>Returns: The acknowledgement text for exoplanet and its dependencies and a
+string containing the BibTeX entries for the citations in the
+acknowledgement.</p>
+</dd></dl>
+
+</div>
+</div>
+
+  <div class="t-pagination clearfix">
+    <span>
+      ← <a href="../../tutorials/citation/" title="Citing exoplanet &amp; its dependencies">Citing exoplanet &amp; its...</a>
+    </span>
+    <span style="float:right">
+      <a href="../dev/" title="Developer documentation">Developer documentation</a> →
+    </span>
+  </div>
+
+
+    </div><footer class="t-foot">
+    &copy; Copyright 2018, 2019, Dan Foreman-Mackey.
+    <br>
+    A <a href="https://typlog.com/">typlog</a> <a href="https://github.com/typlog/sphinx-typlog-theme">sphinx theme</a>,
+    designed by <a href="https://lepture.com/">Hsiaoming Yang</a>.
+</footer>
+  </div>
+  <script>$(function(){$(".t-head_menu").on("click",function(){$("body").addClass("_expand")});$(".t-body").on("click",function(){$("body").removeClass("_expand")});$(".t-sidebar_close").on("click",function(){$("body").removeClass("_expand")});$("a.footnote-reference").on("click",function(e){e.preventDefault();var id=$(this).attr("href");var html=$(id).find("td.label + td").html();var w=Math.max(document.documentElement.clientWidth,window.innerWidth||0);var style="top:"+e.pageY+"px;";if(w>560){style+="width:480px;";if(e.pageX>240&&e.pageX+240<w){style+="left:"+(e.pageX-240)+"px;"}else if(e.pageX<=240){style+="left:20px;"}else{style+="right:20px;"}}showFootnote(html,style)});function showFootnote(html,style){var CONTENT_ID="typlog-footnote-content";var content=document.getElementById(CONTENT_ID);if(!content){content=document.createElement("div");content.id=CONTENT_ID;$(".t-body").append(content)}var MASK_ID="typlog-footnote-mask";var mask=document.getElementById(MASK_ID);if(!mask){mask=document.createElement("div");mask.id=MASK_ID;document.body.appendChild(mask);mask.addEventListener("click",function(){content.className="";mask.className=""})}content.innerHTML=html;content.setAttribute("style",style);content.className="_active";mask.className="_active"}function fetchGitHubRepo(repo){var url="https://api.github.com/repos/"+repo;$.getJSON(url,function(data){var counts=[+new Date,data.stargazers_count,data.forks_count];localStorage.setItem("gh:"+repo,JSON.stringify(counts));updateGitHubStats(counts[1],counts[2])})}function updateGitHubStats(stars,forks){$(".github_stars strong").text(stars);$(".github_forks strong").text(forks)}function initGitHub(url){if(!url){return}var repo=url.replace("https://github.com/","");var cache=localStorage.getItem("gh:"+repo);if(cache){try{var counts=JSON.parse(cache);updateGitHubStats(counts[1],counts[2]);var delta=new Date-counts[0];if(delta<0||delta>9e5){fetchGitHubRepo(repo)}}catch(error){fetchGitHubRepo(repo)}}else{fetchGitHubRepo(repo)}}initGitHub($(".github").attr("href"))});</script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<title>exoplanet &mdash; Fast and scalable MCMC for all your exoplanet needs!</title>
+
+<link rel="shortcut icon" href="_static/logo.png"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono"><link rel="stylesheet" href="_static/typlog.css?v=0.7.3" type="text/css" />
+  <link rel="stylesheet" href="_static/theme.css?v=0.7.3" type="text/css" /><link rel="stylesheet" href="_static/css/exoplanet.css?v=2019-08-02" type="text/css" />
+      <link rel="index" title="Index" href="genindex/"/>
+      <link rel="search" title="Search" href="search/"/>
+    <link rel="top" title="exoplanet 0.2.5.dev40+gec27062 documentation" href="#"/>
+      <link rel="next" title="Installation" href="user/install/"/>
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '');ga('send', 'pageview');</script>
+  <script type="text/javascript" id="documentation_options" data-url_root="#" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="exoplanet">
+  <meta property="og:title" content="License &amp; attribution">
+  <meta name="twitter:card" content="summary">
+</head>
+<body role="document" data-page="index">
+  <header class="t-head">
+    <div class="t-head_menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 384h384v-42.666H64V384zm0-106.666h384v-42.667H64v42.667zM64 128v42.665h384V128H64z"/></svg></div>
+    <a class="t-head_logo" href="#"><img src="_static/logo.png" alt="Logo"/>exoplanet
+    </a>
+  </header>
+  <aside class="t-sidebar">
+    <div class="t-sidebar_close">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>
+    </div>
+    <div class="inner">
+<a class="logo" href="#"><img src="_static/logo.png" alt="Logo"/>
+    exoplanet
+</a><div class="globaltoc">
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user/install/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/citation/">Citing exoplanet &amp; its dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/api/">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/dev/">Developer documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/intro-to-pymc3/">A quick intro to PyMC3 for exoplaneteers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/pymc3-extras/">PyMC3 extras</a></li>
+</ul>
+
+</div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="user/install/" title="next chapter">Installation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox">
+  <form class="search" action="search/" method="get">
+    <div class="input-group">
+      <input type="text" name="q" placeholder="Search" />
+      <button type="submit">Go</button>
+    </div>
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+    </div>
+  </aside>
+  <div class="t-content">
+    <div class="t-body yue">
+      
+
+<h1>exoplanet</h1>
+<p>
+  <a href="https://github.com/dfm/exoplanet">
+    <img src="https://img.shields.io/badge/GitHub-dfm%2Fexoplanet-blue.svg?style=flat"></a>
+  <a href="https://github.com/dfm/exoplanet/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat"></a>
+  <a href="https://zenodo.org/badge/latestdoi/138077978">
+    <img src="https://zenodo.org/badge/138077978.svg"></a>
+  <a href="https://docs.google.com/viewer?url=https://github.com/dfm/exoplanet/raw/master-pdf/paper/exoplanet.pdf">
+    <img src="https://img.shields.io/badge/read-the_paper_draft-blue.svg?style=flat"></a>
+  <br>
+  <a href="https://travis-ci.com/dfm/exoplanet">
+    <img src="https://img.shields.io/travis/dfm/exoplanet/master.svg?style=flat&label=tests"></a>
+  <a href="https://dev.azure.com/foremanmackey/exoplanet/_build?definitionId=1">
+    <img
+      src="https://img.shields.io/azure-devops/build/foremanmackey/704922a0-a57f-4d16-bbea-e37f58c88ba5/1/master.svg?label=paper"></a>
+  <a href="https://exoplanet.dfm.io/en/latest">
+    <img src="https://img.shields.io/readthedocs/exoplanet/latest.svg?style=flat"></a>
+  <br>
+  <a href="https://rodluger.github.io/starry">
+    <img src="https://img.shields.io/badge/powered_by-starry-EB5368.svg?style=flat"></a>
+  <a href="https://celerite.readthedocs.io">
+    <img src="https://img.shields.io/badge/powered_by-celerite-EB5368.svg?style=flat"></a>
+  <a href="https://docs.pymc.io">
+    <img src="https://img.shields.io/badge/powered_by-PyMC3-EB5368.svg?style=flat"></a>
+  <a href="http://www.astropy.org">
+    <img src="https://img.shields.io/badge/powered_by-AstroPy-EB5368.svg?style=flat"></a>
+  <a href="https://github.com/rodluger/corTeX">
+    <img src="https://img.shields.io/badge/powered_by-corTeX-EB5368.svg?style=flat"></a>
+</p>
+
+
+  <p><em>exoplanet</em> is a toolkit for probabilistic modeling of transit and/or radial
+velocity observations of <a class="reference external" href="https://en.wikipedia.org/wiki/Exoplanet">exoplanets</a>
+and other astronomical time series using <a class="reference external" href="https://docs.pymc.io">PyMC3</a>.
+<em>PyMC3</em> is a flexible and high-performance model building language and
+inference engine that scales well to problems with a large number of
+parameters. <em>exoplanet</em> extends <em>PyMC3</em>’s language to support many of the
+custom functions and distributions required when fitting exoplanet datasets.
+These features include:</p>
+<ul class="simple">
+<li><p>A fast and robust solver for Kepler’s equation.</p></li>
+<li><p>Scalable Gaussian Processes using <a class="reference external" href="https://celerite.readthedocs.io">celerite</a>.</p></li>
+<li><p>Fast and accurate limb darkened light curves using <a class="reference external" href="https://rodluger.github.io/starry">starry</a>.</p></li>
+<li><p>Common reparameterizations for <a class="reference external" href="https://arxiv.org/abs/1308.0009">limb darkening parameters</a>, and <a class="reference external" href="https://arxiv.org/abs/1811.04859">planet radius and impact
+parameter</a>.</p></li>
+<li><p>And many others!</p></li>
+</ul>
+<p>All of these functions and distributions include methods for efficiently
+calculating their <em>gradients</em> so that they can be used with gradient-based
+inference methods like <a class="reference external" href="https://arxiv.org/abs/1206.1901">Hamiltonian Monte Carlo</a>,
+<a class="reference external" href="https://arxiv.org/abs/1111.4246">No U-Turns Sampling</a>, and <a class="reference external" href="https://arxiv.org/abs/1603.00788">variational
+inference</a>. These methods tend to be more
+robust than the methods more commonly used in astronomy (like <a class="reference external" href="https://emcee.readthedocs.io">ensemble
+samplers</a> and <a class="reference external" href="https://ccpforge.cse.rl.ac.uk/gf/project/multinest/">nested sampling</a>) especially when the
+model has more than a few parameters. For many exoplanet applications,
+<em>exoplanet</em> (the code) can improve the typical performance by orders of
+magnitude.</p>
+<p><em>exoplanet</em> is being actively developed in <a class="reference external" href="https://github.com/dfm/exoplanet">a public repository on GitHub</a> so if you have any trouble, <a class="reference external" href="https://github.com/dfm/exoplanet/issues">open an issue</a> there.</p>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user/install/">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/install/#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/install/#using-pip">Using pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/install/#from-source">From Source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/install/#testing">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/citation/">Citing exoplanet &amp; its dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user/api/">API documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/api/#orbits">Orbits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/api/#light-curve-models">Light curve models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/api/#scalable-gaussian-processes">Scalable Gaussian processes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/api/#estimators">Estimators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/api/#distributions">Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/api/#utilities">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/api/#units">Units</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/api/#citations">Citations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user/dev/">Developer documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user/dev/#reporting-an-issue">Reporting an issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/dev/#contributing-code-or-documentation">Contributing code or documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/dev/#code-style">Code style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user/dev/#release-management">Release management</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/intro-to-pymc3/">A quick intro to PyMC3 for exoplaneteers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/intro-to-pymc3/#hello-world-aka-fitting-a-line-to-data">Hello world (AKA fitting a line to data)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/intro-to-pymc3/#a-more-realistic-example-radial-velocity-exoplanets">A more realistic example: radial velocity exoplanets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/pymc3-extras/">PyMC3 extras</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/pymc3-extras/#dense-mass-matrices">Dense mass matrices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/pymc3-extras/#evaluating-model-components-for-specific-samples">Evaluating model components for specific samples</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="license-attribution">
+<h1>License &amp; attribution<a class="headerlink" href="#license-attribution" title="Permalink to this headline">¶</a></h1>
+<p>Copyright 2018, 2019 Daniel Foreman-Mackey.</p>
+<p>The source code is made available under the terms of the MIT license.</p>
+<p>If you make use of this code, please cite this package and its dependencies.
+You can find more information about how and what to cite in the
+<a class="reference internal" href="tutorials/citation/#citation"><span class="std std-ref">Citing exoplanet &amp; its dependencies</span></a> documentation.</p>
+<p>These docs were made using <a class="reference external" href="https://www.sphinx-doc.org">Sphinx</a> and the
+<a class="reference external" href="https://github.com/typlog/sphinx-typlog-theme">Typlog theme</a>. They are
+built and hosted on <a class="reference external" href="https://readthedocs.org">Read the Docs</a>.</p>
+</div>
+<div class="section" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>0.2.4 (2019-12-30)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Makes <code class="docutils literal notranslate"><span class="pre">rebound</span></code> an optional dependency</p></li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>0.2.3 (2019-11-12)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Adds <code class="docutils literal notranslate"><span class="pre">ConditionalMeanOp</span></code> and <code class="docutils literal notranslate"><span class="pre">DotLOp</span></code> for scalable conditional mean calculation
+and prior sampling with celerite</p></li>
+<li><p>Adds developer documentation</p></li>
+<li><p>Moves documentation to a separate repository</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>0.2.2 (2019-10-25)<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Adds <code class="docutils literal notranslate"><span class="pre">TTVOrbit</span></code> tutorial</p></li>
+<li><p>Switches tutorials to <a class="reference external" href="https://docs.lightkurve.org">lightkurve</a> for data access</p></li>
+<li><p>Improves packaging and code style features</p></li>
+<li><p>Fixes bugs and improves interface to <code class="docutils literal notranslate"><span class="pre">TTVOrbit</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>0.2.1 (2019-09-26)<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Adds a new interface for tuning dense mass matrices with less overhead</p></li>
+<li><p>Adds support for photodynamics using <a class="reference external" href="https://rebound.rtfd.io">rebound</a></p></li>
+<li><p>Adds a new interface for assigning units to Theano variables</p></li>
+<li><p>Adds new physically-motivated distributions for impact parameter and
+eccentricity</p></li>
+<li><p>Improves test coverage</p></li>
+<li><p>Fixes bug in diagonal elements of the <code class="docutils literal notranslate"><span class="pre">IntegratedTerm</span></code> model</p></li>
+<li><p>Fixes bug in indexing for <code class="docutils literal notranslate"><span class="pre">TTVOrbit</span></code> models with large TTVs</p></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>0.2.0 (2019-08-04)<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Updates <code class="docutils literal notranslate"><span class="pre">starry</span></code> to get much better performance for high order spherical
+harmonics</p></li>
+<li><p>Renames <code class="docutils literal notranslate"><span class="pre">StarryLightCurve</span></code> to <code class="docutils literal notranslate"><span class="pre">LimbDarkLightCurve</span></code></p></li>
+<li><p>Restructures the C++ backend to reduce code duplication</p></li>
+<li><p>Adds support for fitting of astrometric observations</p></li>
+<li><p>Adds support for exposure time integration in <code class="docutils literal notranslate"><span class="pre">celerite</span></code> models</p></li>
+<li><p>Adds new distributions for periodic parameters and U(0, 1).</p></li>
+<li><p>Fixes many small bugs</p></li>
+</ul>
+</div>
+<div class="section" id="id6">
+<h2>0.1.6 (2019-04-24)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Fixes some edge case failures for Kepler solver</p></li>
+<li><p>Improves reliability of contact point solver and fails (more) gracefully
+when this doesn’t work; this reduces the number of divergences when fitting
+a transit model</p></li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>0.1.5 (2019-03-07)<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Improves contact point solver using companion matrix to solve quadratic</p></li>
+<li><p>Improves reliability of <code class="docutils literal notranslate"><span class="pre">Angle</span></code> distribution when the value of the angle
+is well constrained</p></li>
+</ul>
+</div>
+<div class="section" id="id8">
+<h2>0.1.4 (2019-02-10)<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Improves the reliability of the PyMC3Sampler</p></li>
+<li><p>Adds a new <code class="docutils literal notranslate"><span class="pre">optimize</span></code> function since the <code class="docutils literal notranslate"><span class="pre">find_MAP</span></code> method
+in PyMC3 is deprecated</p></li>
+<li><p>Adds cronjob script for automatically updating tutorials.</p></li>
+</ul>
+</div>
+<div class="section" id="id9">
+<h2>0.1.3 (2019-01-09)<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Adds a more robust and faster Kepler solver (<a class="reference external" href="http://adsabs.harvard.edu/abs/1991CeMDA..51..319N">ref</a>)</p></li>
+<li><p>Fixes minor behavioral bugs in PyMC3 sampler wrapper</p></li>
+</ul>
+</div>
+<div class="section" id="id10">
+<h2>0.1.2 (2018-12-13)<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Adds regular grid interpolation Op for Theano</p></li>
+<li><p>Fixes major bug in handling of the stellar radius for transits</p></li>
+<li><p>Fixes small bugs in packaging and installation</p></li>
+<li><p>Fixes handling of diagonal covariances in <code class="docutils literal notranslate"><span class="pre">PyMC3Sampler</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="ipo-2018-12-06">
+<h2>0.1.1 (IPO; 2018-12-06)<a class="headerlink" href="#ipo-2018-12-06" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Initial public release</p></li>
+</ul>
+</div>
+</div>
+
+  <div class="t-pagination clearfix">
+    <span style="float:right">
+      <a href="user/install/" title="Installation">Installation</a> →
+    </span>
+  </div>
+
+
+    </div><footer class="t-foot">
+    &copy; Copyright 2018, 2019, Dan Foreman-Mackey.
+    <br>
+    A <a href="https://typlog.com/">typlog</a> <a href="https://github.com/typlog/sphinx-typlog-theme">sphinx theme</a>,
+    designed by <a href="https://lepture.com/">Hsiaoming Yang</a>.
+</footer>
+  </div>
+  <script>$(function(){$(".t-head_menu").on("click",function(){$("body").addClass("_expand")});$(".t-body").on("click",function(){$("body").removeClass("_expand")});$(".t-sidebar_close").on("click",function(){$("body").removeClass("_expand")});$("a.footnote-reference").on("click",function(e){e.preventDefault();var id=$(this).attr("href");var html=$(id).find("td.label + td").html();var w=Math.max(document.documentElement.clientWidth,window.innerWidth||0);var style="top:"+e.pageY+"px;";if(w>560){style+="width:480px;";if(e.pageX>240&&e.pageX+240<w){style+="left:"+(e.pageX-240)+"px;"}else if(e.pageX<=240){style+="left:20px;"}else{style+="right:20px;"}}showFootnote(html,style)});function showFootnote(html,style){var CONTENT_ID="typlog-footnote-content";var content=document.getElementById(CONTENT_ID);if(!content){content=document.createElement("div");content.id=CONTENT_ID;$(".t-body").append(content)}var MASK_ID="typlog-footnote-mask";var mask=document.getElementById(MASK_ID);if(!mask){mask=document.createElement("div");mask.id=MASK_ID;document.body.appendChild(mask);mask.addEventListener("click",function(){content.className="";mask.className=""})}content.innerHTML=html;content.setAttribute("style",style);content.className="_active";mask.className="_active"}function fetchGitHubRepo(repo){var url="https://api.github.com/repos/"+repo;$.getJSON(url,function(data){var counts=[+new Date,data.stargazers_count,data.forks_count];localStorage.setItem("gh:"+repo,JSON.stringify(counts));updateGitHubStats(counts[1],counts[2])})}function updateGitHubStats(stars,forks){$(".github_stars strong").text(stars);$(".github_forks strong").text(forks)}function initGitHub(url){if(!url){return}var repo=url.replace("https://github.com/","");var cache=localStorage.getItem("gh:"+repo);if(cache){try{var counts=JSON.parse(cache);updateGitHubStats(counts[1],counts[2]);var delta=new Date-counts[0];if(delta<0||delta>9e5){fetchGitHubRepo(repo)}}catch(error){fetchGitHubRepo(repo)}}else{fetchGitHubRepo(repo)}}initGitHub($(".github").attr("href"))});</script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<title>Developer documentation &mdash; exoplanet 0.2.5.dev40+gec27062 documentation</title>
+  
+
+<link rel="shortcut icon" href="../../_static/logo.png"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono"><link rel="stylesheet" href="../../_static/typlog.css?v=0.7.3" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css?v=0.7.3" type="text/css" /><link rel="stylesheet" href="../../_static/css/exoplanet.css?v=2019-08-02" type="text/css" />
+      <link rel="index" title="Index" href="../../genindex/"/>
+      <link rel="search" title="Search" href="../../search/"/>
+    <link rel="top" title="exoplanet 0.2.5.dev40+gec27062 documentation" href="../../"/>
+      <link rel="next" title="A quick intro to PyMC3 for exoplaneteers" href="../../tutorials/intro-to-pymc3/"/>
+      <link rel="prev" title="API documentation" href="../api/"/>
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '');ga('send', 'pageview');</script>
+  <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="exoplanet">
+  <meta property="og:title" content="Developer documentation">
+  <meta name="twitter:card" content="summary">
+</head>
+<body role="document" data-page="user/dev">
+  <header class="t-head">
+    <div class="t-head_menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 384h384v-42.666H64V384zm0-106.666h384v-42.667H64v42.667zM64 128v42.665h384V128H64z"/></svg></div>
+    <a class="t-head_logo" href="../../"><img src="../../_static/logo.png" alt="Logo"/>exoplanet
+    </a>
+  </header>
+  <aside class="t-sidebar">
+    <div class="t-sidebar_close">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>
+    </div>
+    <div class="inner">
+<a class="logo" href="../../"><img src="../../_static/logo.png" alt="Logo"/>
+    exoplanet
+</a><div class="globaltoc">
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install/">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/citation/">Citing exoplanet &amp; its dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/">API documentation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Developer documentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reporting-an-issue">Reporting an issue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-code-or-documentation">Contributing code or documentation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#set-up-your-development-environment">Set up your development environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-your-way-around-the-codebase">Finding your way around the codebase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-your-contribution">Testing your contribution</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#code-style">Code style</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#release-management">Release management</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/intro-to-pymc3/">A quick intro to PyMC3 for exoplaneteers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/pymc3-extras/">PyMC3 extras</a></li>
+</ul>
+
+</div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../">Documentation overview</a><ul>
+      <li>Previous: <a href="../api/" title="previous chapter">API documentation</a></li>
+      <li>Next: <a href="../../tutorials/intro-to-pymc3/" title="next chapter">A quick intro to PyMC3 for exoplaneteers</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox">
+  <form class="search" action="../../search/" method="get">
+    <div class="input-group">
+      <input type="text" name="q" placeholder="Search" />
+      <button type="submit">Go</button>
+    </div>
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+    </div>
+  </aside>
+  <div class="t-content">
+    <div class="t-body yue">
+      
+
+
+  <div class="section" id="developer-documentation">
+<span id="dev"></span><h1>Developer documentation<a class="headerlink" href="#developer-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Development of <code class="docutils literal notranslate"><span class="pre">exoplanet</span></code> is actively happening <a class="reference external" href="https://github.com/dfm/exoplanet">on GitHub</a> and we would love your contributions.
+There are a few different methods of contributing to <code class="docutils literal notranslate"><span class="pre">exoplanet</span></code> and the details are discussed below.</p>
+<div class="section" id="reporting-an-issue">
+<h2>Reporting an issue<a class="headerlink" href="#reporting-an-issue" title="Permalink to this headline">¶</a></h2>
+<p>If you run into issues, bugs, or anything else, it is very useful if you can <a class="reference external" href="https://github.com/dfm/exoplanet/issues">post an issue on the GitHub repository</a>.
+When you post an issue, please provide the details to reproduce the issue.
+For example, if you find a bug, please provide a <em>standalone</em> and <em>executable</em> snippet of code that demonstrates the issue.
+It’s also useful to include details about your platform and the versions of key packages that your using.</p>
+</div>
+<div class="section" id="contributing-code-or-documentation">
+<h2>Contributing code or documentation<a class="headerlink" href="#contributing-code-or-documentation" title="Permalink to this headline">¶</a></h2>
+<p>If you’re not familiar with the workflow for contributing code to a GitHub repository, an excellent place to start is the <a class="reference external" href="https://docs.astropy.org/en/stable/development/workflow/development_workflow.html">AstroPy developer docs</a>.</p>
+<div class="section" id="set-up-your-development-environment">
+<h3>Set up your development environment<a class="headerlink" href="#set-up-your-development-environment" title="Permalink to this headline">¶</a></h3>
+<p>After getting some familiarity with the workflow, you should fork <a class="reference external" href="https://github.com/dfm/exoplanet">the exoplanet repository</a> and clone it to your local machine:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git clone https://github.com/YOURUSERNAME/exoplanet.git
+<span class="nb">cd</span> exoplanet
+git checkout -b BRANCHNAME
+</pre></div>
+</div>
+<p>for some name <code class="docutils literal notranslate"><span class="pre">BRANCHNAME</span></code> describing your contribution.</p>
+<p>Then you should set up an isolated environment for development using a <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">Conda environment</a>, <a class="reference external" href="https://virtualenv.pypa.io/">virtualenv</a>, <a class="reference external" href="https://docs.python.org/3/library/venv.html">venv</a>, or similar.
+If using <code class="docutils literal notranslate"><span class="pre">conda</span></code>, you can get the current development environment from the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create --prefix env -f environment.yml
+conda activate ./env
+</pre></div>
+</div>
+<p>If you have an existing <code class="docutils literal notranslate"><span class="pre">conda</span></code> environment for <code class="docutils literal notranslate"><span class="pre">exoplanet</span></code>, you can update it using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env update --prefix ./env -f environment.yml  --prune
+</pre></div>
+</div>
+<p>If you’re using a <code class="docutils literal notranslate"><span class="pre">pip</span></code> based environment, you can install the developer dependencies as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m pip install -U pip
+python -m pip install -U -r requirements-dev.txt
+</pre></div>
+</div>
+<p>After your environment is set up, you can install the current development version of <code class="docutils literal notranslate"><span class="pre">exoplanet</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m pip install -U setuptools setuptools_scm pep517
+python -m pip uninstall -y exoplanet
+python setup.py develop
+</pre></div>
+</div>
+</div>
+<div class="section" id="finding-your-way-around-the-codebase">
+<h3>Finding your way around the codebase<a class="headerlink" href="#finding-your-way-around-the-codebase" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">exoplanet</span></code> is mostly arranged as a typical Python project with the module root in the <code class="docutils literal notranslate"><span class="pre">src/exoplanet</span></code> directory.
+But there are a few directions that can be useful before diving in:</p>
+<p>1. <strong>Tutorials</strong>: The tutorials are written using the <a class="reference external" href="https://github.com/mwouts/jupytext">jupytext</a> tool to keep the size of the repository from blowing up.
+The tutorial files are saved (using jupytext) in the <code class="docutils literal notranslate"><span class="pre">docs/notebooks</span></code> directory as <code class="docutils literal notranslate"><span class="pre">.py</span></code> files in the <code class="docutils literal notranslate"><span class="pre">py:percent</span></code> format.
+You can edit these files as if they are Jupyter notebooks by using the extension:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>jupyter nbextension install --py jupytext
+jupyter nbextension <span class="nb">enable</span> --py jupytext
+</pre></div>
+</div>
+<p>If you are contributing a new tutorial, you should copy one of the existing ones and try to follow roughly the same format.</p>
+<p>2. <strong>Theano ops</strong>: <code class="docutils literal notranslate"><span class="pre">exoplanet</span></code> comes bundled with a set of custom Theano ops that are implemented in <code class="docutils literal notranslate"><span class="pre">src/exoplanet/theano_ops</span></code>.
+As a user, you’ll rarely interact with these directly and we haven’t put a lot of work into making them user friendly, but if you are interested in diving in, here are some tips.
+First, you should check out the Theano docs that describe how to develop new ops in <a class="reference external" href="http://deeplearning.net/software/theano/extending/extending_theano.html">Python</a> and <a class="reference external" href="http://deeplearning.net/software/theano/extending/extending_theano_c.html">C/C++</a>.
+Most of the <code class="docutils literal notranslate"><span class="pre">exoplanet</span></code> ops are implemented in C++ for speed and we’ve made the design decision to separate the “science” code (which implements the actual operation without any dependency on Theano) and “wrapper” code (which sets up the interface).
+The science code is implemented as a header-only C++ library in <code class="docutils literal notranslate"><span class="pre">src/exoplanet/theano_ops/lib/include/exoplanet</span></code> and then the wrappers are implemented as submodules in <code class="docutils literal notranslate"><span class="pre">src/exoplanet/theano_ops</span></code>.
+A good place to start is the <code class="docutils literal notranslate"><span class="pre">KeplerOp</span></code> implemented in <code class="docutils literal notranslate"><span class="pre">src/exoplanet/theano_ops/kepler</span></code> and <code class="docutils literal notranslate"><span class="pre">src/exoplanet/theano_ops/lib/include/exoplanet/kepler.h</span></code>.</p>
+</div>
+<div class="section" id="testing-your-contribution">
+<h3>Testing your contribution<a class="headerlink" href="#testing-your-contribution" title="Permalink to this headline">¶</a></h3>
+<p>If you’re contributing a change to the code (either a new feature or bug fix), make sure that you implement at least one test that checks the behavior of your code.
+Then, you should run all of the unit tests before submitting a pull request using the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m pytest -sv src/exoplanet
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="code-style">
+<h2>Code style<a class="headerlink" href="#code-style" title="Permalink to this headline">¶</a></h2>
+<p>We have a pretty strict (but easy to implement!) set of style guidelines for the codebase.
+For Python code, we use <a class="reference external" href="https://github.com/timothycrosley/isort">isort</a>, <a class="reference external" href="https://github.com/psf/black">black</a>, and <a class="reference external" href="https://github.com/dfm/black_nbconvert">black_nbconvert</a> (for Jupyter notebooks).
+The custom settings for these projects can be found in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>.
+Before opening a pull request, you can run the formatters as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>isort -rc src
+black src
+black_nbconvert .
+</pre></div>
+</div>
+<p>Or, you can use <a class="reference external" href="https://pre-commit.com">pre-commit</a> to automatically apply the formatting whenever you commit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m pip install -U pre-commit
+pre-commit install
+</pre></div>
+</div>
+</div>
+<div class="section" id="release-management">
+<h2>Release management<a class="headerlink" href="#release-management" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most of this build process is based on the October 2019 update to <a class="reference external" href="https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/">this blog post</a> so you should check that out if you want more info.</p>
+</div>
+<p>This section is mainly internal, but these are the steps that should be executed to produce a new release.</p>
+<ol class="arabic simple">
+<li><p>Update citation date and version in <code class="docutils literal notranslate"><span class="pre">src/exoplanet/citations.py</span></code>.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">run_notebooks.sh</span></code> to make sure that the tutorials all run and merge the updated notebooks on GitHub.</p></li>
+<li><p>Update changelog date in <code class="docutils literal notranslate"><span class="pre">HISTORY.rst</span></code>.</p></li>
+<li><p>Tag a GitHub release.</p></li>
+</ol>
+<p>After executing these steps, the release can be built as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m pip install -U pip pep517 twine setuptools_scm
+git pull
+rm -rf build dist
+python -m pep517.build .
+</pre></div>
+</div>
+<p>Then you can test that the build installs as expected:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm -rf venv-test
+python -m venv venv-test
+venv-test/bin/python -m pip install dist/exoplanet*.tar.gz
+venv-test/bin/python -c <span class="s2">&quot;import exoplanet;print(exoplanet.__version__)&quot;</span>
+</pre></div>
+</div>
+<p>This should print the current version number.
+Similarly you can test the wheel:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm -rf venv-test
+python -m venv venv-test
+venv-test/bin/python -m pip install dist/exoplanet*.whl
+venv-test/bin/python -c <span class="s2">&quot;import exoplanet;print(exoplanet.__version__)&quot;</span>
+</pre></div>
+</div>
+<p>Once you’re satisfied with this build, you can upload it using <code class="docutils literal notranslate"><span class="pre">twine</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>twine upload dist/*
+</pre></div>
+</div>
+</div>
+</div>
+
+  <div class="t-pagination clearfix">
+    <span>
+      ← <a href="../api/" title="API documentation">API documentation</a>
+    </span>
+    <span style="float:right">
+      <a href="../../tutorials/intro-to-pymc3/" title="A quick intro to PyMC3 for exoplaneteers">A quick intro to PyMC3 for...</a> →
+    </span>
+  </div>
+
+
+    </div><footer class="t-foot">
+    &copy; Copyright 2018, 2019, Dan Foreman-Mackey.
+    <br>
+    A <a href="https://typlog.com/">typlog</a> <a href="https://github.com/typlog/sphinx-typlog-theme">sphinx theme</a>,
+    designed by <a href="https://lepture.com/">Hsiaoming Yang</a>.
+</footer>
+  </div>
+  <script>$(function(){$(".t-head_menu").on("click",function(){$("body").addClass("_expand")});$(".t-body").on("click",function(){$("body").removeClass("_expand")});$(".t-sidebar_close").on("click",function(){$("body").removeClass("_expand")});$("a.footnote-reference").on("click",function(e){e.preventDefault();var id=$(this).attr("href");var html=$(id).find("td.label + td").html();var w=Math.max(document.documentElement.clientWidth,window.innerWidth||0);var style="top:"+e.pageY+"px;";if(w>560){style+="width:480px;";if(e.pageX>240&&e.pageX+240<w){style+="left:"+(e.pageX-240)+"px;"}else if(e.pageX<=240){style+="left:20px;"}else{style+="right:20px;"}}showFootnote(html,style)});function showFootnote(html,style){var CONTENT_ID="typlog-footnote-content";var content=document.getElementById(CONTENT_ID);if(!content){content=document.createElement("div");content.id=CONTENT_ID;$(".t-body").append(content)}var MASK_ID="typlog-footnote-mask";var mask=document.getElementById(MASK_ID);if(!mask){mask=document.createElement("div");mask.id=MASK_ID;document.body.appendChild(mask);mask.addEventListener("click",function(){content.className="";mask.className=""})}content.innerHTML=html;content.setAttribute("style",style);content.className="_active";mask.className="_active"}function fetchGitHubRepo(repo){var url="https://api.github.com/repos/"+repo;$.getJSON(url,function(data){var counts=[+new Date,data.stargazers_count,data.forks_count];localStorage.setItem("gh:"+repo,JSON.stringify(counts));updateGitHubStats(counts[1],counts[2])})}function updateGitHubStats(stars,forks){$(".github_stars strong").text(stars);$(".github_forks strong").text(forks)}function initGitHub(url){if(!url){return}var repo=url.replace("https://github.com/","");var cache=localStorage.getItem("gh:"+repo);if(cache){try{var counts=JSON.parse(cache);updateGitHubStats(counts[1],counts[2]);var delta=new Date-counts[0];if(delta<0||delta>9e5){fetchGitHubRepo(repo)}}catch(error){fetchGitHubRepo(repo)}}else{fetchGitHubRepo(repo)}}initGitHub($(".github").attr("href"))});</script>
+</body>
+</html>

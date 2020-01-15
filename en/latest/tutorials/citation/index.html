@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+<title>Citing exoplanet &amp; its dependencies &mdash; exoplanet 0.2.5.dev40+gec27062 documentation</title>
+  
+
+<link rel="shortcut icon" href="../../_static/logo.png"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono"><link rel="stylesheet" href="../../_static/typlog.css?v=0.7.3" type="text/css" />
+  <link rel="stylesheet" href="../../_static/theme.css?v=0.7.3" type="text/css" /><link rel="stylesheet" href="../../_static/css/exoplanet.css?v=2019-08-02" type="text/css" />
+      <link rel="index" title="Index" href="../../genindex/"/>
+      <link rel="search" title="Search" href="../../search/"/>
+    <link rel="top" title="exoplanet 0.2.5.dev40+gec27062 documentation" href="../../"/>
+      <link rel="next" title="API documentation" href="../../user/api/"/>
+      <link rel="prev" title="Installation" href="../../user/install/"/>
+  <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create', '');ga('send', 'pageview');</script>
+  <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="exoplanet">
+  <meta property="og:title" content="Citing exoplanet &amp; its dependencies">
+  <meta name="twitter:card" content="summary">
+</head>
+<body role="document" data-page="tutorials/citation">
+  <header class="t-head">
+    <div class="t-head_menu"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 384h384v-42.666H64V384zm0-106.666h384v-42.667H64v42.667zM64 128v42.665h384V128H64z"/></svg></div>
+    <a class="t-head_logo" href="../../"><img src="../../_static/logo.png" alt="Logo"/>exoplanet
+    </a>
+  </header>
+  <aside class="t-sidebar">
+    <div class="t-sidebar_close">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z"/></svg>
+    </div>
+    <div class="inner">
+<a class="logo" href="../../"><img src="../../_static/logo.png" alt="Logo"/>
+    exoplanet
+</a><div class="globaltoc">
+<p class="caption"><span class="caption-text">User Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../user/install/">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Citing exoplanet &amp; its dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/api/">API documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user/dev/">Developer documentation</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro-to-pymc3/">A quick intro to PyMC3 for exoplaneteers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pymc3-extras/">PyMC3 extras</a></li>
+</ul>
+
+</div><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../">Documentation overview</a><ul>
+      <li>Previous: <a href="../../user/install/" title="previous chapter">Installation</a></li>
+      <li>Next: <a href="../../user/api/" title="next chapter">API documentation</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox">
+  <form class="search" action="../../search/" method="get">
+    <div class="input-group">
+      <input type="text" name="q" placeholder="Search" />
+      <button type="submit">Go</button>
+    </div>
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+    </div>
+  </aside>
+  <div class="t-content">
+    <div class="t-body yue">
+      
+
+
+  <span class="target" id="module-exoplanet"></span><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This tutorial was generated from an IPython notebook that can be
+downloaded <a class="reference external" href="../../_static/notebooks/citation.ipynb">here</a>.</p>
+</div>
+<div class="section" id="citing-exoplanet-its-dependencies">
+<span id="citation"></span><h1>Citing exoplanet &amp; its dependencies<a class="headerlink" href="#citing-exoplanet-its-dependencies" title="Permalink to this headline">¶</a></h1>
+<p>The <em>exoplanet</em> package is mostly just glue that connects many other
+ideas and software. In a situation like this, it can be easy to forget
+about the important infrastructure upon which our science is built. In
+order to make sure that you can easily give credit where credit is due,
+we have tried to make it as painless as possible to work out which
+citations are expected for a model fit using <em>exoplanet</em> by including a
+<a class="reference internal" href="../../user/api/#exoplanet.citations.get_citations_for_model" title="exoplanet.citations.get_citations_for_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">exoplanet.citations.get_citations_for_model()</span></code></a> function that
+introspects the current PyMC3 model and constructs a list of citations
+for the functions used in that model.</p>
+<p>For example, you might compute a quadratically limb darkened light curve
+using <code class="docutils literal notranslate"><span class="pre">starry</span></code> (via the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">exoplanet.light_curve.StarryLightCurve</span></code> class):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pymc3</span> <span class="k">as</span> <span class="nn">pm</span>
+<span class="kn">import</span> <span class="nn">exoplanet</span> <span class="k">as</span> <span class="nn">xo</span>
+
+<span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">Model</span><span class="p">()</span> <span class="k">as</span> <span class="n">model</span><span class="p">:</span>
+    <span class="n">u</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">QuadLimbDark</span><span class="p">(</span><span class="s2">&quot;u&quot;</span><span class="p">)</span>
+    <span class="n">orbit</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">orbits</span><span class="o">.</span><span class="n">KeplerianOrbit</span><span class="p">(</span><span class="n">period</span><span class="o">=</span><span class="mf">10.0</span><span class="p">)</span>
+    <span class="n">light_curve</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">LimbDarkLightCurve</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+    <span class="n">transit</span> <span class="o">=</span> <span class="n">light_curve</span><span class="o">.</span><span class="n">get_light_curve</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">orbit</span><span class="o">=</span><span class="n">orbit</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
+
+    <span class="n">txt</span><span class="p">,</span> <span class="n">bib</span> <span class="o">=</span> <span class="n">xo</span><span class="o">.</span><span class="n">citations</span><span class="o">.</span><span class="n">get_citations_for_model</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../../user/api/#exoplanet.citations.get_citations_for_model" title="exoplanet.citations.get_citations_for_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">exoplanet.citations.get_citations_for_model()</span></code></a> function would
+generate an acknowledgement that cites:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.pymc.io/#citing-pymc3">PyMC3</a>: for the inference
+engine and modeling framework,</p></li>
+<li><p><a class="reference external" href="http://deeplearning.net/software/theano/citation.html">Theano</a>:
+for the numerical infrastructure,</p></li>
+<li><p><a class="reference external" href="http://www.astropy.org/acknowledging.html">AstroPy</a>: for units
+and constants,</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1308.0009">Kipping (2013)</a>: for the
+reparameterization of the limb darkening parameters for a quadratic
+law, and</p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/1810.06559">Luger, et al. (2018)</a>: for the
+light curve calculation.</p></li>
+</ul>
+<p>The first output from
+<a class="reference internal" href="../../user/api/#exoplanet.citations.get_citations_for_model" title="exoplanet.citations.get_citations_for_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">exoplanet.citations.get_citations_for_model()</span></code></a> gives the
+acknowledgement text:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+</pre></div>
+</div>
+<pre class="literal-block">This research made use of textsf{exoplanet} citep{exoplanet} and its
+dependencies citep{exoplanet:agol19, exoplanet:astropy13, exoplanet:astropy18,
+exoplanet:exoplanet, exoplanet:kipping13, exoplanet:luger18, exoplanet:pymc3,
+exoplanet:theano}.</pre>
+<p>And the second output is a string with BibTeX entries for each of the
+citations in the acknowledgement text:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">bib</span><span class="p">)</span>
+</pre></div>
+</div>
+<pre class="literal-block">&#64;misc{exoplanet:exoplanet,
+  author = {Daniel Foreman-Mackey and Ian Czekala and Rodrigo Luger and
+            Eric Agol and Geert Barentsen and Tom Barclay},
+   title = {dfm/exoplanet v0.2.4},
+   month = dec,
+    year = 2019,
+     doi = {10.5281/zenodo.1998447},
+     url = {https://doi.org/10.5281/zenodo.1998447}
+}
+
+
+&#64;article{exoplanet:pymc3,
+    title={Probabilistic programming in Python using PyMC3},
+   author={Salvatier, John and Wiecki, Thomas V and Fonnesbeck, Christopher},
+  journal={PeerJ Computer Science},
+   volume={2},
+    pages={e55},
+     year={2016},
+publisher={PeerJ Inc.}
+}
+
+
+&#64;article{exoplanet:theano,
+    title=&quot;{Theano: A {Python} framework for fast computation of mathematical
+            expressions}&quot;,
+   author={{Theano Development Team}},
+  journal={arXiv e-prints},
+   volume={abs/1605.02688},
+     year=2016,
+    month=may,
+      url={http://arxiv.org/abs/1605.02688}
+}
+
+
+&#64;ARTICLE{exoplanet:kipping13,
+   author = {{Kipping}, D.~M.},
+    title = &quot;{Efficient, uninformative sampling of limb darkening coefficients
+              for two-parameter laws}&quot;,
+  journal = {mnras},
+     year = 2013,
+    month = nov,
+   volume = 435,
+    pages = {2152-2160},
+      doi = {10.1093/mnras/stt1435},
+   adsurl = {http://adsabs.harvard.edu/abs/2013MNRAS.435.2152K},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+
+&#64;article{exoplanet:astropy13,
+   author = {{Astropy Collaboration} and {Robitaille}, T.~P. and {Tollerud},
+             E.~J. and {Greenfield}, P. and {Droettboom}, M. and {Bray}, E. and
+             {Aldcroft}, T. and {Davis}, M. and {Ginsburg}, A. and
+             {Price-Whelan}, A.~M. and {Kerzendorf}, W.~E. and {Conley}, A. and
+             {Crighton}, N. and {Barbary}, K. and {Muna}, D. and {Ferguson}, H.
+             and {Grollier}, F. and {Parikh}, M.~M. and {Nair}, P.~H. and
+             {Unther}, H.~M. and {Deil}, C. and {Woillez}, J. and {Conseil}, S.
+             and {Kramer}, R. and {Turner}, J.~E.~H. and {Singer}, L. and
+             {Fox}, R. and {Weaver}, B.~A. and {Zabalza}, V. and {Edwards},
+             Z.~I. and {Azalee Bostroem}, K. and {Burke}, D.~J. and {Casey},
+             A.~R. and {Crawford}, S.~M. and {Dencheva}, N. and {Ely}, J. and
+             {Jenness}, T. and {Labrie}, K. and {Lim}, P.~L. and
+             {Pierfederici}, F. and {Pontzen}, A. and {Ptak}, A. and {Refsdal},
+             B. and {Servillat}, M. and {Streicher}, O.},
+    title = &quot;{Astropy: A community Python package for astronomy}&quot;,
+  journal = {aap},
+     year = 2013,
+    month = oct,
+   volume = 558,
+    pages = {A33},
+      doi = {10.1051/0004-6361/201322068},
+   adsurl = {http://adsabs.harvard.edu/abs/2013A%26A...558A..33A},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+&#64;article{exoplanet:astropy18,
+   author = {{Astropy Collaboration} and {Price-Whelan}, A.~M. and
+             {Sip{H o}cz}, B.~M. and {G{&quot;u}nther}, H.~M. and {Lim}, P.~L. and
+             {Crawford}, S.~M. and {Conseil}, S. and {Shupe}, D.~L. and
+             {Craig}, M.~W. and {Dencheva}, N. and {Ginsburg}, A. and
+             {VanderPlas}, J.~T. and {Bradley}, L.~D. and
+             {P{'e}rez-Su{'a}rez}, D. and {de Val-Borro}, M.
+             and {Aldcroft}, T.~L. and {Cruz}, K.~L. and {Robitaille}, T.~P.
+             and {Tollerud}, E.~J. and {Ardelean}, C. and {Babej}, T. and
+             {Bach}, Y.~P. and {Bachetti}, M. and {Bakanov}, A.~V. and
+             {Bamford}, S.~P. and {Barentsen}, G. and {Barmby}, P. and
+             {Baumbach}, A. and {Berry}, K.~L.  and {Biscani}, F. and
+             {Boquien}, M. and {Bostroem}, K.~A. and {Bouma}, L.~G. and
+             {Brammer}, G.~B. and {Bray}, E.~M. and {Breytenbach}, H. and
+             {Buddelmeijer}, H. and {Burke}, D.~J. and {Calderone}, G. and
+             {Cano Rodr{'{i}}guez}, J.~L. and {Cara}, M. and {Cardoso},
+             J.~V.~M. and {Cheedella}, S. and {Copin}, Y. and {Corrales}, L.
+             and {Crichton}, D. and {D'Avella}, D. and {Deil}, C. and
+             {Depagne}, {'E}. and {Dietrich}, J.~P. and {Donath}, A. and
+             {Droettboom}, M. and {Earl}, N. and {Erben}, T. and {Fabbro}, S.
+             and {Ferreira}, L.~A. and {Finethy}, T. and {Fox}, R.~T. and
+             {Garrison}, L.~H. and {Gibbons}, S.~L.~J. and {Goldstein}, D.~A.
+             and {Gommers}, R. and {Greco}, J.~P. and {Greenfield}, P. and
+             {Groener}, A.~M. and {Grollier}, F. and {Hagen}, A. and {Hirst},
+             P. and {Homeier}, D. and {Horton}, A.~J. and {Hosseinzadeh}, G.
+             and {Hu}, L. and {Hunkeler}, J.~S. and {Ivezi{'c}}, {v Z}. and
+             {Jain}, A. and {Jenness}, T. and {Kanarek}, G. and {Kendrew}, S.
+             and {Kern}, N.~S. and {Kerzendorf}, W.~E. and {Khvalko}, A. and
+             {King}, J. and {Kirkby}, D. and {Kulkarni}, A.~M. and {Kumar}, A.
+             and {Lee}, A.  and {Lenz}, D.  and {Littlefair}, S.~P. and {Ma},
+             Z. and {Macleod}, D.~M. and {Mastropietro}, M. and {McCully}, C.
+             and {Montagnac}, S. and {Morris}, B.~M. and {Mueller}, M. and
+             {Mumford}, S.~J. and {Muna}, D. and {Murphy}, N.~A. and {Nelson},
+             S. and {Nguyen}, G.~H. and {Ninan}, J.~P. and {N{&quot;o}the}, M. and
+             {Ogaz}, S. and {Oh}, S. and {Parejko}, J.~K.  and {Parley}, N. and
+             {Pascual}, S. and {Patil}, R. and {Patil}, A.~A.  and {Plunkett},
+             A.~L. and {Prochaska}, J.~X. and {Rastogi}, T. and {Reddy Janga},
+             V. and {Sabater}, J.  and {Sakurikar}, P. and {Seifert}, M. and
+             {Sherbert}, L.~E. and {Sherwood-Taylor}, H. and {Shih}, A.~Y. and
+             {Sick}, J. and {Silbiger}, M.~T. and {Singanamalla}, S. and
+             {Singer}, L.~P. and {Sladen}, P.~H. and {Sooley}, K.~A. and
+             {Sornarajah}, S. and {Streicher}, O. and {Teuben}, P. and
+             {Thomas}, S.~W. and {Tremblay}, G.~R. and {Turner}, J.~E.~H. and
+             {Terr{'o}n}, V.  and {van Kerkwijk}, M.~H. and {de la Vega}, A.
+             and {Watkins}, L.~L. and {Weaver}, B.~A. and {Whitmore}, J.~B. and
+             {Woillez}, J.  and {Zabalza}, V. and {Astropy Contributors}},
+    title = &quot;{The Astropy Project: Building an Open-science Project and Status
+              of the v2.0 Core Package}&quot;,
+  journal = {aj},
+     year = 2018,
+    month = sep,
+   volume = 156,
+    pages = {123},
+      doi = {10.3847/1538-3881/aabc4f},
+   adsurl = {http://adsabs.harvard.edu/abs/2018AJ....156..123A},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+
+&#64;article{exoplanet:luger18,
+   author = {{Luger}, R. and {Agol}, E. and {Foreman-Mackey}, D. and {Fleming},
+             D.~P. and {Lustig-Yaeger}, J. and {Deitrick}, R.},
+    title = &quot;{starry: Analytic Occultation Light Curves}&quot;,
+  journal = {aj},
+     year = 2019,
+    month = feb,
+   volume = 157,
+    pages = {64},
+      doi = {10.3847/1538-3881/aae8e5},
+   adsurl = {http://adsabs.harvard.edu/abs/2019AJ....157...64L},
+  adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
+
+&#64;article{exoplanet:agol19,
+       author = {{Agol}, Eric and {Luger}, Rodrigo and {Foreman-Mackey}, Daniel},
+        title = &quot;{Analytic Planetary Transit Light Curves and Derivatives
+                  for Stars with Polynomial Limb Darkening}&quot;,
+      journal = {arXiv e-prints},
+         year = 2019,
+        month = aug,
+       eprint = {1908.03222},
+          url = {http://arxiv.org/abs/1908.03222}
+}</pre>
+</div>
+
+  <div class="t-pagination clearfix">
+    <span>
+      ← <a href="../../user/install/" title="Installation">Installation</a>
+    </span>
+    <span style="float:right">
+      <a href="../../user/api/" title="API documentation">API documentation</a> →
+    </span>
+  </div>
+
+
+    </div><footer class="t-foot">
+    &copy; Copyright 2018, 2019, Dan Foreman-Mackey.
+    <br>
+    A <a href="https://typlog.com/">typlog</a> <a href="https://github.com/typlog/sphinx-typlog-theme">sphinx theme</a>,
+    designed by <a href="https://lepture.com/">Hsiaoming Yang</a>.
+</footer>
+  </div>
+  <script>$(function(){$(".t-head_menu").on("click",function(){$("body").addClass("_expand")});$(".t-body").on("click",function(){$("body").removeClass("_expand")});$(".t-sidebar_close").on("click",function(){$("body").removeClass("_expand")});$("a.footnote-reference").on("click",function(e){e.preventDefault();var id=$(this).attr("href");var html=$(id).find("td.label + td").html();var w=Math.max(document.documentElement.clientWidth,window.innerWidth||0);var style="top:"+e.pageY+"px;";if(w>560){style+="width:480px;";if(e.pageX>240&&e.pageX+240<w){style+="left:"+(e.pageX-240)+"px;"}else if(e.pageX<=240){style+="left:20px;"}else{style+="right:20px;"}}showFootnote(html,style)});function showFootnote(html,style){var CONTENT_ID="typlog-footnote-content";var content=document.getElementById(CONTENT_ID);if(!content){content=document.createElement("div");content.id=CONTENT_ID;$(".t-body").append(content)}var MASK_ID="typlog-footnote-mask";var mask=document.getElementById(MASK_ID);if(!mask){mask=document.createElement("div");mask.id=MASK_ID;document.body.appendChild(mask);mask.addEventListener("click",function(){content.className="";mask.className=""})}content.innerHTML=html;content.setAttribute("style",style);content.className="_active";mask.className="_active"}function fetchGitHubRepo(repo){var url="https://api.github.com/repos/"+repo;$.getJSON(url,function(data){var counts=[+new Date,data.stargazers_count,data.forks_count];localStorage.setItem("gh:"+repo,JSON.stringify(counts));updateGitHubStats(counts[1],counts[2])})}function updateGitHubStats(stars,forks){$(".github_stars strong").text(stars);$(".github_forks strong").text(forks)}function initGitHub(url){if(!url){return}var repo=url.replace("https://github.com/","");var cache=localStorage.getItem("gh:"+repo);if(cache){try{var counts=JSON.parse(cache);updateGitHubStats(counts[1],counts[2]);var delta=new Date-counts[0];if(delta<0||delta>9e5){fetchGitHubRepo(repo)}}catch(error){fetchGitHubRepo(repo)}}else{fetchGitHubRepo(repo)}}initGitHub($(".github").attr("href"))});</script>
+</body>
+</html>
