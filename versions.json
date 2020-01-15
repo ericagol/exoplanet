@@ -1,4 +1,4 @@
-[
-  "latest",
-  "stable"
-]
+{
+    "latest": "abcd",
+    "stable": "defg"
+}
